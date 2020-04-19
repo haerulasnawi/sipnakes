@@ -13,7 +13,7 @@
         </div>
     </div>    
   </div>
-  <div class="card author-box card-primary" style="">
+  <div class="card author-box card-primary">
     <div class="card-body">
       <div class="author-box-left">
         <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle author-box-picture">

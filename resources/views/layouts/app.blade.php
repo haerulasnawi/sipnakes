@@ -33,7 +33,10 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Bantuan</a>
-                            </li>                                
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Cek Sip Nakes</a>
+                            </li> 
                             @if (Route::has('login'))
                                 @auth
                                 <li class="nav-item">
