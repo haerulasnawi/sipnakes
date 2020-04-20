@@ -13,7 +13,7 @@
 
 use Illuminate\Routing\RouteGroup;
 
-Route::get('/test', function () {
+Route::get('/datasipnakes', function () {
     return view('search');
 });
 Route::get('/', function () {

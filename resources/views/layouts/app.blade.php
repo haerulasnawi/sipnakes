@@ -33,9 +33,6 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Bantuan</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Cek Sip Nakes</a>
                             </li> 
                             @if (Route::has('login'))
                                 @auth
@@ -43,13 +40,16 @@
                                     <a class="btn btn-primary" href="{{ url('/home') }}"> HOME </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="btn btn-warning" href="{{ url('/home') }}"" onclick="event.preventDefault();
+                                    <a class="btn btn-warning" href="{{ url('/home') }}" onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();"> KELUAR </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
                                 </li>
                                 @else
+                                <li class="nav-item">
+                                    <a class="btn btn-warning" href="{{url('/datasipnakes')}}">Cek SIP Nakes</a>
+                                </li>
                                 <li class="nav-item">
                                     <a class="btn btn-primary" href="{{ route('login') }}"> MASUK </a>
                                 </li>                                                                                                        

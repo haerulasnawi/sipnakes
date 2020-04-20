@@ -11,7 +11,7 @@
                 <p>Dinas Kesehatan Kabupaten Lombok Barat</p>
                 <br>
                 @if (Route::has('register'))                    
-                    <!-- <p><a class="btn btn-light" href="{{ route('register') }}"> DAFTAR </a></p>                     -->
+                    <p><a class="btn btn-light" href="{{ route('register') }}"> DAFTAR </a></p>                    
                 @endif 
             </div>
             <div class="col-md-6">

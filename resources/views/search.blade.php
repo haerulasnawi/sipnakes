@@ -1,9 +1,23 @@
 @extends('layouts.auth')
 @section('login')
 <div class="card card-primary">
-    <div class="card-header"><h4>Cek Nomor Registrasi Nakes</h4></div>
+    <div class="card-header"><h4>Cek STR dan SIP Nakes</h4></div>
     <div class="card-body">
         <div class="form-group">
+          <label class="form-label">Pilih Jenis Dokumen</label>
+          <div class="custom-switches-stacked mt-2">
+            <label class="custom-switch">
+              <input type="radio" name="option" value="1" class="custom-switch-input" checked="">
+              <span class="custom-switch-indicator"></span>
+              <span class="custom-switch-description">STR</span>
+            </label>
+            <label class="custom-switch">
+              <input type="radio" name="option" value="2" class="custom-switch-input">
+              <span class="custom-switch-indicator"></span>
+              <span class="custom-switch-description">SIP</span>
+            </label>
+          </div>
+          <label class="form-label">Masukan Nomor Dokumen</label>
           <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="" aria-label="">
             <div class="input-group-append">
@@ -25,8 +39,7 @@
                 <div class="row">
                     <div class="col-5">
                         <p class="diskripsi">
-                          <i class="far fa-id-card"></i>
-                            Nama Lengkap
+                            Nama 
                         </p>
                     </div>
                     <div class="col-7">
@@ -38,8 +51,7 @@
                 <div class="row">
                     <div class="col-5">
                         <p class="diskripsi">
-                          <i class="fas fa-calendar-alt"></i>
-                           Tempat, tanggal lahir
+                           Profesi
                         </p>
                     </div>
                     <div class="col-7">
@@ -50,32 +62,13 @@
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-5">
-                        <p class="diskripsi"><i class="fas fa-venus-mars"></i> Jenis Kelamin</p>
+                        <p class="diskripsi"> Surat Tanda Registrasi</p>
                     </div>                        
                     <div class="col-6">
-                        <p class="diskripsi">: P </p>
+                        <p class="diskripsi">: <span class="badge badge-success">Teregistrasi</span> </p>
                     </div>
                 </div>
             </li>
-            <li class="list-group-item"><div class="row">
-                <div class="col-5">
-                    <p class="diskripsi"><i class="fas fa-map-marked-alt"></i> Alamat</p>
-                </div>
-                <div class="col-1">
-                    :
-                </div>
-                <div class="col-6">
-                    <p class="diskripsi"> </p>
-                </div>
-            </div></li>
-            <li class="list-group-item"><div class="row">
-                <div class="col-5">
-                    <p class="diskripsi"><i class="fas fa-mobile-alt"></i> Nomor kontak</p>
-                </div>
-                <div class="col-7">
-                    <p class="diskripsi">: 24234 </p>
-                </div>
-            </div></li>
           </ul>
         </div>
       </div>
