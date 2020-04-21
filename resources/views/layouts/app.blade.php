@@ -48,7 +48,7 @@
                                 </li>
                                 @else
                                 <li class="nav-item">
-                                    <a class="btn btn-warning" href="{{url('/datasipnakes')}}">Cek SIP Nakes</a>
+                                    <a class="btn btn-warning" href="{{url('/datasipnakes')}}">Cek Status Nakes</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="btn btn-primary" href="{{ route('login') }}"> MASUK </a>
