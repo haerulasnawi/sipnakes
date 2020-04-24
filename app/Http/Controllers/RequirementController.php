@@ -26,10 +26,10 @@ class RequirementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+    // public function create()
+    // {
+    //     //
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -37,10 +37,10 @@ class RequirementController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+    // public function store(Request $request)
+    // {
+    //     //
+    // }
 
     /**
      * Display the specified resource.
@@ -48,10 +48,10 @@ class RequirementController extends Controller
      * @param  \App\requiremen  $requiremen
      * @return \Illuminate\Http\Response
      */
-    public function show(requirement $requiremen)
-    {
-        //
-    }
+    // public function show(requirement $requiremen)
+    // {
+    //     //
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -59,10 +59,10 @@ class RequirementController extends Controller
      * @param  \App\requiremen  $requiremen
      * @return \Illuminate\Http\Response
      */
-    public function edit(requirement $requiremen)
-    {
-        //
-    }
+    // public function edit(requirement $requiremen)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -71,10 +71,10 @@ class RequirementController extends Controller
      * @param  \App\requiremen  $requiremen
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, requirement $requiremen)
-    {
-        //
-    }
+    // public function update(Request $request, requirement $requiremen)
+    // {
+    //     //
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -82,10 +82,10 @@ class RequirementController extends Controller
      * @param  \App\requiremen  $requiremen
      * @return \Illuminate\Http\Response
      */
-    public function destroy(requirement $requiremen)
-    {
-        //
-    }
+    // public function destroy(requirement $requiremen)
+    // {
+    //     //
+    // }
     public function dataTable(Request $request)
     {
         if (request()->ajax()) {
