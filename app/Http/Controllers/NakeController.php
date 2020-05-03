@@ -47,7 +47,7 @@ class NakeController extends Controller
      */
     // public function store(Request $request)
     // {
-        
+
     // }
 
     /**
@@ -58,7 +58,7 @@ class NakeController extends Controller
      */
     // public function show($id)
     // {
-        
+
     // }
 
     /**
@@ -69,7 +69,7 @@ class NakeController extends Controller
      */
     // public function edit($id)
     // {
-        
+
     // }
 
     /**
@@ -81,7 +81,7 @@ class NakeController extends Controller
      */
     // public function update(Request $request, $id)
     // {
-        
+
     // }
 
     /**
@@ -92,7 +92,7 @@ class NakeController extends Controller
      */
     // public function destroy($id)
     // {
-        
+
     // }
     public function dataTable(Request $request)
     {
@@ -108,7 +108,7 @@ class NakeController extends Controller
             }
             if (Auth::user()->role == 'admin') {
                 $model = DB::table('isips')
-                    ->select([DB::raw("CONCAT(isips.nake_id) as id"),DB::raw("CONCAT(isips.nake_id) as full_name"), 'gender', 'str_mass', 'nama_jnakes', 'nakes_phone_number', 'tgl_lahir', 'nik', 'nip', 'gelar', 'nama_faskes', 'str_ket'])
+                    ->select([DB::raw("CONCAT(isips.nake_id) as id"), DB::raw("CONCAT(isips.nake_id) as full_name"), 'gender', 'str_mass', 'nama_jnakes', 'nakes_phone_number', 'tgl_lahir', 'nik', 'nip', 'gelar', 'nama_faskes', 'str_ket'])
                     ->Join('jnakes', 'jnakes.id', '=', 'isips.jnake_id')
                     ->Join('nakes', 'nakes.id', '=', 'isips.nake_id')
                     ->Join('istrs', 'istrs.nake_id', '=', 'isips.nake_id')

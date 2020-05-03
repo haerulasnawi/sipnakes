@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \App\Jnake;
 use \App\Faske;
+use \App\User;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 
@@ -27,10 +28,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function create()
-    // {
-    //     //
-    // }
+    public function create()
+    {
+        $model = new user();
+        return view('pages.user.form', compact('model'));
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -87,6 +89,16 @@ class UserController extends Controller
     // {
     //     //
     // }
+
+    public function json()
+    {
+        $model = DB::table('users')->select([
+            DB::raw("CONCAT(users.id) as id"),
+            DB::raw("CONCAT(users.first_name,' ',users.last_name) as full_name"),
+            'username', 'email', 'role'
+        ])->get();
+        return response()->json($model);
+    }
     public function dataTable(Request $request)
     {
         if (request()->ajax()) {

@@ -30,6 +30,7 @@ Route::post('/table/nakes', 'NakeController@dataTable')->name('table.daftar.nake
 //user route
 Route::resource('/users', 'UserController');
 Route::post('/table/user', 'UserController@dataTable')->name('table.daftar.user');
+Route::get('/json','UserController@json');
 
 //faskes route
 Route::resource('/faskes', 'FaskeController');
