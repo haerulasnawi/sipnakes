@@ -33,10 +33,10 @@ class NakeController extends Controller
      */
     public function create()
     {
-        $nakes = new Nake;
-        // $jnakes = Jnake::all();
-        return view('pages.nakes.form', compact('nakes'))->with('jnakes');
-        // return view('pages.nakes.form');
+        $model = new Nake;
+        $jnakes = Jnake::all();
+        $jnakes = $jnakes->pluck('nama_jnakes', 'id');
+        return view('pages.nakes.form', compact(['model', 'jnakes']));
     }
 
     /**
@@ -45,10 +45,9 @@ class NakeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // public function store(Request $request)
-    // {
-
-    // }
+    public function store(Request $request)
+    {
+    }
 
     /**
      * Display the specified resource.
@@ -132,9 +131,9 @@ class NakeController extends Controller
                     return '<div class="media-progressbar">
                     <div class="progress-text">' . $model->str_mass . '%</div>
                     <div class="progress" data-height="6" style="height: 6px;">
-                      <div class="progress-bar bg-primary" data-width="' . $model->str_mass . '%" style="width: ' . $model->str_mass . '%;"></div>
+                    <div class="progress-bar bg-primary" data-width="' . $model->str_mass . '%" style="width: ' . $model->str_mass . '%;"></div>
                     </div>
-                  </div>';
+                    </div>';
                 })
                 ->addColumn('action', function ($model) {
                     return view('layouts._action', [
