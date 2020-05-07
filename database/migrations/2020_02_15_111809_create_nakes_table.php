@@ -21,8 +21,10 @@ class CreateNakesTable extends Migration
             $table->foreign('jnake_id')->references('id')->on('jnakes');
             $table->string('nik', 16)->nullable();
             $table->string('nip', 18)->nullable();
-            $table->string('full_name');
-            $table->string('gelar')->nullable();
+            $table->string('first_name');
+            $table->string('last_name')->nullable();
+            $table->string('gelar_depan')->nullable();
+            $table->string('gelar_belakang')->nullable();
             $table->date('tgl_lahir');
             $table->char('gender', 1);
             $table->string('nakes_phone_number', 13)->nullable();

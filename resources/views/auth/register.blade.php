@@ -4,87 +4,87 @@
     <div class="card-header"><h4>Register</h4></div>
 
     <div class="card-body">
-      <form method="POST" action="{{ route('register') }}">
-        @csrf        
-        <div class="row">
-          <div class="form-group col-6">
+    <form method="POST" action="{{ route('register') }}">
+        @csrf
+        {{-- <div class="row">
+        <div class="form-group col-6">
             <label for="first_name">First Name</label>
             <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" autofocus="">
             @error('first_name')
             <div class="invalid-feedback">
-              <strong>{{ $message }}</strong>
+            <strong>{{ $message }}</strong>
             </div>
             @enderror
-          </div>
-          <div class="form-group col-6">
+        </div>
+        <div class="form-group col-6">
             <label for="last_name">Last Name</label>
             <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" autofocus="">
             @error('last_name')
             <div class="invalid-feedback">
-              <strong>{{ $message }}</strong>
+            <strong>{{ $message }}</strong>
             </div>
             @enderror
-          </div>
         </div>
+        </div> --}}
         <div class="row">
-          <div class="form-group col-12">
+        <div class="form-group col-12">
             <label for="username">Username</label>
             <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" autofocus="">
             @error('username')
             <div class="invalid-feedback">
-              <strong>{{ $message }}</strong>
+            <strong>{{ $message }}</strong>
             </div>
             @enderror
-          </div>
+        </div>
         </div>
         <div class="row">
-          <div class="form-group col-6">
+        <div class="form-group col-6">
             <label class="d-block">Jenis Kelamin</label>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="gender" id="exampleRadios1" checked="" value="P">
-              <label class="form-check-label" for="exampleRadios1">
+            <input class="form-check-input" type="radio" name="gender" id="exampleRadios1" checked="" value="P">
+            <label class="form-check-label" for="exampleRadios1">
                 Perempuan
-              </label>
+            </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="gender" id="exampleRadios2" checked="" value="L">
-              <label class="form-check-label" for="exampleRadios2">
+            <input class="form-check-input" type="radio" name="gender" id="exampleRadios2" checked="" value="L">
+            <label class="form-check-label" for="exampleRadios2">
                 Laki-laki
-              </label>
+            </label>
             </div>
-          </div>
-          <div class="form-group col-6">
+        </div>
+        <div class="form-group col-6">
             <label>Tanggal Lahir</label>
             <input id="tgl_lahir" type="date" class="form-control @error('tgl_lahir') is-invalid @enderror" name="tgl_lahir">
             @error('tgl_lahir')
             <div class="invalid-feedback">
-              <strong>{{ $message }}</strong>
+            <strong>{{ $message }}</strong>
             </div>
             @enderror
-          </div>
+        </div>
         </div>
         <div class="form-group">
-          <label>Phone Number</label>
-          <div class="input-group">
+        <label>Phone Number</label>
+        <div class="input-group">
             <div class="input-group-prepend">
-              <div class="input-group-text">
+            <div class="input-group-text">
                 <i>+62</i>
-              </div>
+            </div>
             </div>
             <input type="number" class="form-control" name="phone">
-          </div>
+        </div>
         </div>
         <div class="form-group">
-          <label for="email">Email</label>
-          <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-          @error('email')
-          <div class="invalid-feedback">
+        <label for="email">Email</label>
+        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+        @error('email')
+        <div class="invalid-feedback">
             <strong>{{ $message }}</strong>
-          </div>
-          @enderror
+        </div>
+        @enderror
         </div>
         <div class="row">
-          <div class="form-group col-6">
+        <div class="form-group col-6">
             <label for="password" class="d-block">{{ __('Password') }}</label>
             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
             @error('password')
@@ -92,24 +92,24 @@
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
-          </div>
-          <div class="form-group col-6">
+        </div>
+        <div class="form-group col-6">
             <label for="password2" class="d-block">Password Confirmation</label>
             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-          </div>
+        </div>
         </div>
         <div class="form-group">
-          <button type="submit" class="btn btn-primary btn-lg btn-block">
+        <button type="submit" class="btn btn-primary btn-lg btn-block">
             Register
-          </button>
+        </button>
         </div>
-      </form>
-      <div class="mt-5 text-muted text-center">
+    </form>
+    <div class="mt-5 text-muted text-center">
         <a href="{{ route('password.request') }}">{{ __('Lupa Password ?') }}</a><br>
-         Menu <a href="{{ route('login') }}">{{ __('Login') }}</a>
+        Menu <a href="{{ route('login') }}">{{ __('Login') }}</a>
     </div>
     </div>
-  </div>
+</div>
 @endsection
 @push('script_bottom')
 <script>$(document).ready(function() {
