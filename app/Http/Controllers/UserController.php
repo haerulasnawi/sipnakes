@@ -94,7 +94,7 @@ class UserController extends Controller
     {
         $model = DB::table('users')->select([
             DB::raw("CONCAT(users.id) as id"),
-            DB::raw("CONCAT(users.first_name,' ',users.last_name) as full_name"),
+            // DB::raw("CONCAT(users.first_name,' ',users.last_name) as full_name"),
             'username', 'email', 'role'
         ])->get();
         return response()->json($model);
@@ -104,7 +104,7 @@ class UserController extends Controller
         if (request()->ajax()) {
             $model = DB::table('users')->select([
                 DB::raw("CONCAT(users.id) as id"),
-                DB::raw("CONCAT(users.first_name,' ',users.last_name) as full_name"),
+                // DB::raw("CONCAT(users.first_name,' ',users.last_name) as full_name"),
                 'username', 'email', 'role'
             ])
                 ->where('role', '!=', 'admin');
@@ -114,9 +114,10 @@ class UserController extends Controller
             if ($email = $request->email) {
                 $model->where('email', 'like', "%$email%");
             }
-            if ($full_name = $request->full_name) {
-                $model->WhereRaw("concat(first_name, ' ', last_name) like '%$full_name%'")
-                    ->orWhere('username', 'like', "%$full_name%");
+            if ($username = $request->username) {
+                $model->where('username', 'like', "%$username%");
+                // $model->WhereRaw("concat(first_name, ' ', last_name) like '%$full_name%'")
+                //     ->orWhere('username', 'like', "%$full_name%");
             }
             $datatables = DataTables::of($model)
                 ->addIndexColumn()

@@ -20,24 +20,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//nakes route
-Route::resource('/nakes', 'NakeController');
-Route::get('/profile', function () {
-    return view('pages.nakes.profile.index');
-})->name('profile.nakes');
-Route::post('/table/nakes', 'NakeController@dataTable')->name('table.daftar.nakes');
 
-//user route
-Route::resource('/users', 'UserController');
-Route::post('/table/user', 'UserController@dataTable')->name('table.daftar.user');
-Route::get('/json','UserController@json');
 
-//faskes route
-Route::resource('/faskes', 'FaskeController');
-Route::get('/profile_faskes', function () {
-    return view('pages.faskes.profile.index');
-})->name('profile.faskes');
-Route::post('/table/daftar_faskes', 'FaskeController@dataTable')->name('table.daftar.faskes');
+
+
+
+
 
 //istr roure
 Route::resource('/str', 'IstrController');
@@ -55,22 +43,29 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 
 
 // Route::get('/table/user_biasa', 'NakeController@dataTable')->name('table.user.biasa');
-// Route::group(['middleware' => ['auth', 'checkrole:superadmin', 'verified']], function () {
-//     Route::get('/admin', function () {
-//         return 'Halaman admin';
-//     });
-// });
-// Route::group(['middleware' => ['auth', 'checkrole:,superadmin,admin', 'verified']], function () {
-//     Route::get('/admin', function () {
-//         return 'Halaman admin';
-//     });
-// });
-// Route::group(['middleware' => ['auth', 'checkrole:superadmin,admin,nakes,faskes', 'verified']], function () {
-// });
-// Route::group(['middleware' => ['auth', 'checkrole:nakes', 'verified']], function () {
-//     Route::get('/nakes', function () {
-//         return 'Halaman nakes';
-//     });
-// });
-// Route::group(['middleware' => ['auth', 'checkrole:faskes', 'verified']], function () {
-// });
+Route::group(['middleware' => ['auth', 'checkrole:superadmin', 'verified']], function () {
+    //user route
+    Route::resource('/users', 'UserController');
+    Route::post('/table/user', 'UserController@dataTable')->name('table.daftar.user');
+    Route::get('/json', 'UserController@json');
+});
+Route::group(['middleware' => ['auth', 'checkrole:,superadmin,admin', 'verified']], function () {
+    //faskes route
+    Route::resource('/faskes', 'FaskeController');
+    Route::post('/table/daftar_faskes', 'FaskeController@dataTable')->name('table.daftar.faskes');
+});
+Route::group(['middleware' => ['auth', 'checkrole:superadmin,admin,faskes', 'verified']], function () {
+    //nakes route
+    Route::resource('/nakes', 'NakeController');
+    Route::post('/table/nakes', 'NakeController@dataTable')->name('table.daftar.nakes');
+});
+Route::group(['middleware' => ['auth', 'checkrole:nakes', 'verified']], function () {
+    Route::get('/profile', function () {
+        return view('pages.nakes.profile.index');
+    })->name('profile.nakes');
+});
+Route::group(['middleware' => ['auth', 'checkrole:faskes', 'verified']], function () {
+    Route::get('/profile_faskes', function () {
+        return view('pages.faskes.profile.index');
+    })->name('profile.faskes');
+});

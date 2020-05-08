@@ -26,8 +26,8 @@
                     </select>
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="full_name">Nama User  </label>
-                    <input type="text" name="full_name" id="full_name" class="form-control">
+                    <label for="username">Nama User  </label>
+                    <input type="text" name="username" id="username" class="form-control">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="email">Email</label>
@@ -50,7 +50,7 @@
                     <th>No.</th>
                     <th>Role</th>
                     <th>Username</th>
-                    <th>Nama Lengkap</th>
+                    {{-- <th>Nama Lengkap</th> --}}
                     <th>Email</th>
                     <th>Action</th>
                     </tr>
@@ -98,7 +98,7 @@ $(document).ready(function() {
             url:"{{route('table.daftar.user')}}",
             type:'post',
             data:function(d){
-                d.full_name=$('#full_name').val();
+                d.username=$('#username').val();
                 d.role=$('#role').val();
                 d.email=$('#email').val();
             }
@@ -107,7 +107,7 @@ $(document).ready(function() {
                 {data:'DT_RowIndex', name: 'DT_RowIndex'},
                 {data:'role',name:'role'},
                 {data:'username',name:'username'},
-                {data:'full_name',name:'users.first_name'},
+                // {data:'full_name',name:'users.first_name'},
                 {data:'email',name:'email'},
                 {data:'action',name:'id',searchable:false}
             ],
@@ -118,7 +118,7 @@ $(document).ready(function() {
         });
         $('#search_form').on('reset',function(e){
         $('#role').val('');
-        $('#full_name').val('');
+        $('#username').val('');
         $('#email').val('');
         t.draw();
         e.preventDefault();
