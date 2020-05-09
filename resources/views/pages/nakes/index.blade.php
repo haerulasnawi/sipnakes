@@ -106,7 +106,7 @@
                         <th>NIK</th>
                         <th>NIP</th>
                         <th>Nama Lengkap</th>
-                        <th>Gelar</th>
+                        {{-- <th>Gelar</th> --}}
                         <th>Gender</th>
                         <th>Profesi</th>
                         <th>Kontak</th>
@@ -162,7 +162,7 @@ $(document).ready(function() {
             columnDefs: [ {
                 searchable: false,
                 orderable: false,
-                targets: [0,11]
+                targets: [0,10]
             }],
             order: [[ 10, 'asc' ]],
             responsive: {
@@ -190,7 +190,7 @@ $(document).ready(function() {
                 {data:'nik',name:'nik'},
                 {data:'nip',name:'nip'},
                 {data:'full_name',name:'full_name'},
-                {data:'gelar',name:'nakes.gelar',searchable:false},
+                // {data:'gelar',name:'nakes.gelar',searchable:false},
                 {data:'gender',name:'gender'},
                 {data:'nama_jnakes',name:'jnakes.nama_jnakes',searchable:false},
                 {data:'nakes_phone_number',name:'nakes.nakes_phone_number'},
@@ -209,7 +209,7 @@ $(document).ready(function() {
         columnDefs: [ {
             searchable: false,
             orderable: false,
-            targets: [0,10]
+            targets: [0,9]
         }],
         order: [[ 8, 'asc' ]],
         responsive: {
@@ -237,7 +237,7 @@ $(document).ready(function() {
                 {data:'nik',name:'nik'},
                 {data:'nip',name:'nip'},
                 {data:'full_name',name:'full_name'},
-                {data:'gelar',name:'nakes.gelar',searchable:false},
+                // {data:'gelar',name:'nakes.gelar',searchable:false},
                 {data:'gender',name:'gender'},
                 {data:'nama_jnakes',name:'jnakes.nama_jnakes',searchable:false},
                 {data:'nakes_phone_number',name:'nakes.nakes_phone_number'},

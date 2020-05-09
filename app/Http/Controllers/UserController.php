@@ -8,6 +8,7 @@ use \App\Faske;
 use \App\User;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -62,10 +63,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function edit($id)
-    // {
-    //     //
-    // }
+    public function edit($id)
+    {
+        //
+    }
 
     /**
      * Update the specified resource in storage.
@@ -102,12 +103,21 @@ class UserController extends Controller
     public function dataTable(Request $request)
     {
         if (request()->ajax()) {
-            $model = DB::table('users')->select([
-                DB::raw("CONCAT(users.id) as id"),
-                // DB::raw("CONCAT(users.first_name,' ',users.last_name) as full_name"),
-                'username', 'email', 'role'
-            ])
-                ->where('role', '!=', 'admin');
+            if (Auth::user()->role == 'superadmin') {
+                $model = DB::table('users')->select([
+                    DB::raw("CONCAT(users.id) as id"),
+                    // DB::raw("CONCAT(users.first_name,' ',users.last_name) as full_name"),
+                    'username', 'email', 'role'
+                ]);
+            } else {
+                $model = DB::table('users')->select([
+                    DB::raw("CONCAT(users.id) as id"),
+                    // DB::raw("CONCAT(users.first_name,' ',users.last_name) as full_name"),
+                    'username', 'email', 'role'
+                ])->where('role', '!=', 'superadmin');
+            }
+
+
             if ($role = $request->role) {
                 $model->where('role', 'like', "%$role%");
             }
@@ -122,12 +132,13 @@ class UserController extends Controller
             $datatables = DataTables::of($model)
                 ->addIndexColumn()
                 ->addColumn('action', function ($model) {
-                    return view('layouts._action', [
-                        'model' => $model,
-                        'url_show' => route('nakes.show', $model->id),
-                        'url_edit' => route('nakes.edit', $model->id),
-                        'url_destroy' => route('nakes.destroy', $model->id)
-                    ]);
+                    return '<a href="' . route('nakes.show', $model->id) . '" class="btn btn-outline-secondary " title="Detail: ' . $model->id . '"><i class="fas fa-key"> Ganti Password</i></a>';
+                    // return view('layouts._action', [
+                    //     'model' => $model,
+                    //     'url_show' => route('nakes.show', $model->id),
+                    //     'url_edit' => route('nakes.edit', $model->id),
+                    //     'url_destroy' => route('nakes.destroy', $model->id)
+                    // ]);
                 });
             // ->rawColumn('full_name','action');
 

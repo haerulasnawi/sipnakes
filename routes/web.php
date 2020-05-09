@@ -20,13 +20,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-
-
-
-
-
-
 //istr roure
 Route::resource('/str', 'IstrController');
 Route::post('table/str', 'IstrController@dataTable')->name('table.str');
@@ -45,11 +38,13 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 // Route::get('/table/user_biasa', 'NakeController@dataTable')->name('table.user.biasa');
 Route::group(['middleware' => ['auth', 'checkrole:superadmin', 'verified']], function () {
     //user route
+
+});
+Route::group(['middleware' => ['auth', 'checkrole:,superadmin,admin', 'verified']], function () {
+    //User route
     Route::resource('/users', 'UserController');
     Route::post('/table/user', 'UserController@dataTable')->name('table.daftar.user');
     Route::get('/json', 'UserController@json');
-});
-Route::group(['middleware' => ['auth', 'checkrole:,superadmin,admin', 'verified']], function () {
     //faskes route
     Route::resource('/faskes', 'FaskeController');
     Route::post('/table/daftar_faskes', 'FaskeController@dataTable')->name('table.daftar.faskes');

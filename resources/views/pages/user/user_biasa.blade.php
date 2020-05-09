@@ -50,7 +50,6 @@
                     <th>No.</th>
                     <th>Role</th>
                     <th>Username</th>
-                    {{-- <th>Nama Lengkap</th> --}}
                     <th>Email</th>
                     <th>Action</th>
                     </tr>
@@ -107,7 +106,6 @@ $(document).ready(function() {
                 {data:'DT_RowIndex', name: 'DT_RowIndex'},
                 {data:'role',name:'role'},
                 {data:'username',name:'username'},
-                // {data:'full_name',name:'users.first_name'},
                 {data:'email',name:'email'},
                 {data:'action',name:'id',searchable:false}
             ],

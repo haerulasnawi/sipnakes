@@ -100,14 +100,14 @@ class NakeController extends Controller
             if (Auth::user()->role == 'faskes') {
                 $model = DB::table('isips')
                     ->where('faske_id', '=', Auth::user()->faske->id)
-                    ->select([DB::raw("CONCAT(isips.nake_id) as id"), 'full_name', 'gender', 'str_mass', 'nama_jnakes', 'nakes_phone_number', 'tgl_lahir', 'nik', 'nip', 'gelar', 'str_ket'])
+                    ->select([DB::raw("CONCAT(isips.nake_id) as id"), 'gender', 'str_mass', 'nama_jnakes', 'nakes_phone_number', 'tgl_lahir', 'nik', 'nip', 'gelar_depan', 'gelar_belakang', 'str_ket'])
                     ->Join('jnakes', 'jnakes.id', '=', 'isips.jnake_id')
                     ->Join('nakes', 'nakes.id', '=', 'isips.nake_id')
                     ->Join('istrs', 'istrs.nake_id', '=', 'isips.nake_id');
             }
             if (Auth::user()->role == 'admin') {
                 $model = DB::table('isips')
-                    ->select([DB::raw("CONCAT(isips.nake_id) as id"), DB::raw("CONCAT(isips.nake_id) as full_name"), 'gender', 'str_mass', 'nama_jnakes', 'nakes_phone_number', 'tgl_lahir', 'nik', 'nip', 'gelar', 'nama_faskes', 'str_ket'])
+                    ->select([DB::raw("CONCAT(isips.nake_id) as id"), 'gender', 'str_mass', 'nama_jnakes', 'nakes_phone_number', 'tgl_lahir', 'nik', 'nip', 'gelar_depan', 'gelar_belakang', 'nama_faskes', 'str_ket'])
                     ->Join('jnakes', 'jnakes.id', '=', 'isips.jnake_id')
                     ->Join('nakes', 'nakes.id', '=', 'isips.nake_id')
                     ->Join('istrs', 'istrs.nake_id', '=', 'isips.nake_id')
@@ -120,7 +120,9 @@ class NakeController extends Controller
                 $model->where('nik', 'like', "%$nik%");
             }
             if ($full_name = $request->full_name) {
-                $model->where('full_name', 'like', "%$full_name%");
+                // $model->where('full_name', 'like', "%$full_name%");
+                $model->WhereRaw("concat(gelar_depan,first_name, ' ', last_name,gelar_belakang) like '%$full_name%'")
+                    ->orWhere('full_name', 'like', "%$full_name%");
             }
             if ($gender = $request->gender) {
                 $model->where('gender', 'like', "%$gender%");
