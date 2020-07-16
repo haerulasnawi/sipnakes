@@ -1,6 +1,6 @@
-<form action="">
-    <div class="modal fade" tabindex="-1" role="dialog" id="modal">
-        <div class="modal-dialog" role="document">
+{{-- <form action=""> --}}
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
             <h5 id="modal-title" class="modal-title">Form Input</h5>
@@ -19,4 +19,4 @@
         </div>
         </div>
     </div>
-</form>
+{{-- </form> --}}

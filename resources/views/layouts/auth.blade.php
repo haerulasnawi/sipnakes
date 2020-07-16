@@ -14,7 +14,7 @@
             @yield('login')
             
             <div class="simple-footer">
-              Copyright &copy; Stisla 2018
+              Copyright &copy; Haerul Asnawi 2020
             </div>
           </div>
         </div>

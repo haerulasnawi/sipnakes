@@ -41,15 +41,15 @@ Route::group(['middleware' => ['auth', 'checkrole:superadmin', 'verified']], fun
 
 });
 Route::group(['middleware' => ['auth', 'checkrole:,superadmin,admin', 'verified']], function () {
-    //User route
-    Route::resource('/users', 'UserController');
-    Route::post('/table/user', 'UserController@dataTable')->name('table.daftar.user');
-    Route::get('/json', 'UserController@json');
+
     //faskes route
     Route::resource('/faskes', 'FaskeController');
     Route::post('/table/daftar_faskes', 'FaskeController@dataTable')->name('table.daftar.faskes');
 });
 Route::group(['middleware' => ['auth', 'checkrole:superadmin,admin,faskes', 'verified']], function () {
+    //User route
+    Route::resource('/users', 'UserController');
+    Route::post('/table/user', 'UserController@dataTable')->name('table.daftar.user');
     //nakes route
     Route::resource('/nakes', 'NakeController');
     Route::post('/table/nakes', 'NakeController@dataTable')->name('table.daftar.nakes');

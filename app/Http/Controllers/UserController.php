@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use \App\Jnake;
 use \App\Faske;
 use \App\User;
+use Illuminate\Contracts\Session\Session;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -19,9 +22,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $jnakes = Jnake::all();
-        $faskes = Faske::all();
-        return view('pages.user.user_biasa', ['jnakes' => $jnakes, 'faskes' => $faskes]);
+        // $jnakes = Jnake::all();
+        // $faskes = Faske::all();
+        // return view('pages.user.user_biasa', ['jnakes' => $jnakes, 'faskes' => $faskes]);
+        return view('pages.user.user_biasa');
     }
 
     /**
@@ -41,10 +45,10 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // public function store(Request $request)
-    // {
-    //     //
-    // }
+    public function store(Request $request)
+    {
+        //
+    }
 
     /**
      * Display the specified resource.
@@ -65,7 +69,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $model = User::findOrFail($id);
+        // dd($model);
+        return view('pages.user.form', compact('model'));
     }
 
     /**
@@ -75,10 +81,20 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function update(Request $request, $id)
-    // {
-    //     //
-    // }
+    public function update(Request $request, $id)
+    {
+        // dd($request->all());
+        $request->validate([
+            'password' => ['required', 'string', 'min:8', 'confirmed']
+        ]);
+        $model['password'] = $request->password;
+        // dd($model);
+        // $model['password'] = Hash::make($model['password']);
+        // dd($model);
+        User::findOrFail($id)->update(['password' => Hash::make($model['password'])]);
+        $request->session()->flash('success', 'Data Berhasil Diupdate!');
+        // return redirect()->route('home');
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -91,15 +107,15 @@ class UserController extends Controller
     //     //
     // }
 
-    public function json()
-    {
-        $model = DB::table('users')->select([
-            DB::raw("CONCAT(users.id) as id"),
-            // DB::raw("CONCAT(users.first_name,' ',users.last_name) as full_name"),
-            'username', 'email', 'role'
-        ])->get();
-        return response()->json($model);
-    }
+    // public function json()
+    // {
+    //     $model = DB::table('users')->select([
+    //         DB::raw("CONCAT(users.id) as id"),
+    //         // DB::raw("CONCAT(users.first_name,' ',users.last_name) as full_name"),
+    //         'username', 'email', 'role'
+    //     ])->get();
+    //     return response()->json($model);
+    // }
     public function dataTable(Request $request)
     {
         if (request()->ajax()) {
@@ -109,12 +125,20 @@ class UserController extends Controller
                     // DB::raw("CONCAT(users.first_name,' ',users.last_name) as full_name"),
                     'username', 'email', 'role'
                 ]);
-            } else {
+            }
+            if (Auth::user()->role == 'admin') {
                 $model = DB::table('users')->select([
                     DB::raw("CONCAT(users.id) as id"),
                     // DB::raw("CONCAT(users.first_name,' ',users.last_name) as full_name"),
                     'username', 'email', 'role'
                 ])->where('role', '!=', 'superadmin');
+            }
+            if (Auth::user()->role == 'faskes') {
+                $model = DB::table('users')
+                    ->join('nakes', 'users.id', '=', 'nakes.user_id')
+                    ->join('isips', 'isips.nake_id', '=', 'nakes.id')
+                    ->select([DB::raw("CONCAT(nakes.user_id)as id"), 'username', 'email', 'role'])
+                    ->where('isips.faske_id', '=', Auth::user()->faske->id);
             }
 
 
@@ -132,7 +156,7 @@ class UserController extends Controller
             $datatables = DataTables::of($model)
                 ->addIndexColumn()
                 ->addColumn('action', function ($model) {
-                    return '<a href="' . route('nakes.show', $model->id) . '" class="btn btn-outline-secondary " title="Detail: ' . $model->id . '"><i class="fas fa-key"> Ganti Password</i></a>';
+                    return '<a href="' . route('users.edit', $model->id) . '" class="btn btn-outline-secondary modal-show edit" title="Username: ' . $model->username . ' email: ' . $model->email . '"><i class="fas fa-key"> Ganti Password</i></a>';
                     // return view('layouts._action', [
                     //     'model' => $model,
                     //     'url_show' => route('nakes.show', $model->id),

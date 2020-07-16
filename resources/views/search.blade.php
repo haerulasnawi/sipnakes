@@ -4,7 +4,7 @@
     <div class="card-header"><h4>Cek Status Nakes</h4></div>
     <div class="card-body">
         <div class="form-group">
-          <label class="form-label">Pilih Jenis Dokumen</label>
+          {{-- <label class="form-label">Pilih Jenis Dokumen</label>
           <div class="custom-switches-stacked mt-2">
             <label class="custom-switch">
               <input type="radio" name="option" value="nik" class="custom-switch-input" checked="">
@@ -21,7 +21,7 @@
               <span class="custom-switch-indicator"></span>
               <span class="custom-switch-description">SIP</span>
             </label>
-          </div>
+          </div> --}}
           <label class="form-label">Masukan Nomor Dokumen</label>
           <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="" aria-label="">

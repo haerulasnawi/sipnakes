@@ -64,6 +64,7 @@
 <script src="assets/modules/jquery-ui/jquery-ui.min.js"></script>
 <script src="assets/modules/summernote/summernote-bs4.js"></script>
 <script src="assets/modules/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 <!-- Page Specific JS File -->
 <script src="assets/js/page/modules-datatables.js"></script>

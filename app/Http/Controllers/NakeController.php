@@ -47,6 +47,8 @@ class NakeController extends Controller
      */
     public function store(Request $request)
     {
+        $model = Nake::create($request->all());
+        return $model;
     }
 
     /**
@@ -100,18 +102,18 @@ class NakeController extends Controller
             if (Auth::user()->role == 'faskes') {
                 $model = DB::table('isips')
                     ->where('faske_id', '=', Auth::user()->faske->id)
-                    ->select([DB::raw("CONCAT(isips.nake_id) as id"), 'gender', 'str_mass', 'nama_jnakes', 'nakes_phone_number', 'tgl_lahir', 'nik', 'nip', 'gelar_depan', 'gelar_belakang', 'str_ket'])
-                    ->Join('jnakes', 'jnakes.id', '=', 'isips.jnake_id')
-                    ->Join('nakes', 'nakes.id', '=', 'isips.nake_id')
-                    ->Join('istrs', 'istrs.nake_id', '=', 'isips.nake_id');
-            }
-            if (Auth::user()->role == 'admin') {
-                $model = DB::table('isips')
-                    ->select([DB::raw("CONCAT(isips.nake_id) as id"), 'gender', 'str_mass', 'nama_jnakes', 'nakes_phone_number', 'tgl_lahir', 'nik', 'nip', 'gelar_depan', 'gelar_belakang', 'nama_faskes', 'str_ket'])
                     ->Join('jnakes', 'jnakes.id', '=', 'isips.jnake_id')
                     ->Join('nakes', 'nakes.id', '=', 'isips.nake_id')
                     ->Join('istrs', 'istrs.nake_id', '=', 'isips.nake_id')
-                    ->Join('faskes', 'faskes.id', '=', 'isips.faske_id');
+                    ->select([DB::raw("CONCAT(isips.nake_id) as id"), DB::raw("CONCAT(nakes.gelar_depan,' ',nakes.first_name,' ',nakes.last_name,' ',nakes.gelar_belakang) as full_name"), 'gender', 'str_mass', 'nama_jnakes', 'nakes_phone_number', 'tgl_lahir', 'nik', 'nip', 'gelar_depan', 'gelar_belakang', 'str_ket']);
+            }
+            if (Auth::user()->role == 'admin' || 'superadmin') {
+                $model = DB::table('isips')
+                    ->Join('jnakes', 'jnakes.id', '=', 'isips.jnake_id')
+                    ->Join('nakes', 'nakes.id', '=', 'isips.nake_id')
+                    ->Join('istrs', 'istrs.nake_id', '=', 'isips.nake_id')
+                    ->Join('faskes', 'faskes.id', '=', 'isips.faske_id')
+                    ->select([DB::raw("CONCAT(isips.nake_id) as id"), DB::raw("CONCAT(nakes.gelar_depan,' ',nakes.first_name,' ',nakes.last_name,' ',nakes.gelar_belakang) as full_name"), 'gender', 'str_mass', 'nama_jnakes', 'nakes_phone_number', 'tgl_lahir', 'nik', 'nip', 'gelar_depan', 'gelar_belakang', 'nama_faskes', 'str_ket']);
             }
             if ($status = $request->status) {
                 $model->where('str_ket', 'like', "%$status%");
