@@ -23,7 +23,7 @@
     </div>
 </div>
 <div class="section-body">
-    <h2 class="section-title">Hi, {{ Auth::user()->first_name}} !</h2>
+    <h2 class="section-title">Hi, {{ Auth::user()->nake->first_name}} !</h2>
     {{-- <p class="section-lead">
         Change information about yourself on this page.
     </p> --}}
@@ -62,7 +62,7 @@
                             </p>
                         </div>
                         <div class="col-7">
-                            <p class="diskripsi">:&emsp;{{Auth::user()->nake->full_name}} </p>
+                            <p class="diskripsi">:&emsp;{{Auth::user()->nake->gelar_depan}} {{Auth::user()->nake->first_name}} {{Auth::user()->nake->last_name}} {{Auth::user()->nake->gelar_belakang}}</p>
                         </div>
                     </div>
                 </li>

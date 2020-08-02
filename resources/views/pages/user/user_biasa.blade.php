@@ -12,7 +12,7 @@
         <div class="col-12">
         <div class="card">
             <div class="card-header">
-            <h4>Basic DataTables</h4>
+            <h4>Tabel User</h4>
             </div>
             <div class="card-body">
                 <form id="search_form">
@@ -26,7 +26,7 @@
                     </select>
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="username">Nama User  </label>
+                    <label for="username">Username</label>
                     <input type="text" name="username" id="username" class="form-control">
                 </div>
                 <div class="form-group col-md-4">

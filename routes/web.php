@@ -28,7 +28,7 @@ Route::post('table/str', 'IstrController@dataTable')->name('table.str');
 Route::resource('/persyaratan', 'RequirementController');
 Route::post('/table/peryaratan', 'RequirementController@dataTable')->name('table.persyaratan');
 //dashboard
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware('verified');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware(['verified', 'checkrole:superadmin,admin,faskes,nakes']);
 
 
 Auth::routes(['verify' => true]);

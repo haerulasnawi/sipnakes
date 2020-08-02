@@ -9,12 +9,13 @@
             <a href="index.html">St</a>
         </div>
         <ul class="sidebar-menu">
+            
+            @if (auth()->user()->role=='superadmin')
             <li class="menu-header">Dashboard</li>
             <li>
                 <a class="nav-link" href="{{route('dashboard')}}"><i
                         class="fas fa-fire"></i><span>Dashboard</span></a>
             </li>
-            @if (auth()->user()->role=='superadmin')
             <li class="menu-header">Berkas</li>
             <li>
                 <a class="nav-link" href="layout-default.html"><i
@@ -63,6 +64,11 @@
             </li>
             @endif
             @if (auth()->user()->role=='admin')
+            <li class="menu-header">Dashboard</li>
+            <li>
+                <a class="nav-link" href="{{route('dashboard')}}"><i
+                        class="fas fa-fire"></i><span>Dashboard</span></a>
+            </li>
             <li class="menu-header">Berkas</li>
             <li>
                 <a class="nav-link" href="layout-default.html"><i
@@ -104,6 +110,11 @@
             </li>
             @endif
             @if (auth()->user()->role=='faskes')
+            <li class="menu-header">Dashboard</li>
+            <li>
+                <a class="nav-link" href="{{route('dashboard')}}"><i
+                        class="fas fa-fire"></i><span>Dashboard</span></a>
+            </li>
             <li class="menu-header">Profile</li>
             <li>
                 <a class="nav-link" href="{{route('profile.faskes')}}"><i
