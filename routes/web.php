@@ -11,11 +11,10 @@
 |
 */
 
+use App\Http\Controllers\NakeController;
 use Illuminate\Routing\RouteGroup;
 
-Route::get('/datasipnakes', function () {
-    return view('search');
-});
+Route::get('/datasipnakes', 'NakeController@cariNakes');
 Route::get('/', function () {
     return view('welcome');
 });
@@ -40,13 +39,15 @@ Route::group(['middleware' => ['auth', 'checkrole:superadmin', 'verified']], fun
     //user route
 
 });
+
 Route::group(['middleware' => ['auth', 'checkrole:,superadmin,admin', 'verified']], function () {
 
     //faskes route
     Route::resource('/faskes', 'FaskeController');
     Route::post('/table/daftar_faskes', 'FaskeController@dataTable')->name('table.daftar.faskes');
 });
-Route::group(['middleware' => ['auth', 'checkrole:superadmin,admin,faskes', 'verified']], function () {
+
+Route::group(['middleware' => ['auth', 'checkrole:superadmin,admin,faskes,nakes,guest', 'verified']], function () {
     //User route
     Route::resource('/users', 'UserController');
     Route::post('/table/user', 'UserController@dataTable')->name('table.daftar.user');
@@ -54,11 +55,13 @@ Route::group(['middleware' => ['auth', 'checkrole:superadmin,admin,faskes', 'ver
     Route::resource('/nakes', 'NakeController');
     Route::post('/table/nakes', 'NakeController@dataTable')->name('table.daftar.nakes');
 });
+
 Route::group(['middleware' => ['auth', 'checkrole:nakes', 'verified']], function () {
     Route::get('/profile', function () {
         return view('pages.nakes.profile.index');
     })->name('profile.nakes');
 });
+
 Route::group(['middleware' => ['auth', 'checkrole:faskes', 'verified']], function () {
     Route::get('/profile_faskes', function () {
         return view('pages.faskes.profile.index');

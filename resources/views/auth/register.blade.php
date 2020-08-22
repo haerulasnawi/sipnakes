@@ -37,7 +37,7 @@
             @enderror
         </div>
         </div>
-        <div class="row">
+        {{-- <div class="row">
         <div class="form-group col-6">
             <label class="d-block">Jenis Kelamin</label>
             <div class="form-check">
@@ -62,8 +62,8 @@
             </div>
             @enderror
         </div>
-        </div>
-        <div class="form-group">
+        </div> --}}
+        {{-- <div class="form-group">
         <label>Phone Number</label>
         <div class="input-group">
             <div class="input-group-prepend">
@@ -73,7 +73,7 @@
             </div>
             <input type="number" class="form-control" name="phone">
         </div>
-        </div>
+        </div> --}}
         <div class="form-group">
         <label for="email">Email</label>
         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">

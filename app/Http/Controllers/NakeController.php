@@ -6,11 +6,18 @@ use Illuminate\Http\Request;
 use \App\Nake;
 use \App\Jnake;
 use \App\Faske;
+use Dotenv\Validator;
+use Illuminate\Auth\Events\Validated;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator as FacadesValidator;
 use lluminate\Http\Response;
 use Illuminate\Support\Str;
+use phpDocumentor\Reflection\Types\Null_;
+use PhpParser\Node\Stmt\Return_;
+use RealRashid\SweetAlert\Facades\Alert;
+
 // use DataTables;
 
 
@@ -47,6 +54,19 @@ class NakeController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'jnakes' => ['required', 'numeric', 'max:2'],
+            'nik' => ['sometimes', 'required', 'numeric', 'digits:16', 'unique:nakes'],
+            'nip' => ['numeric', 'digits:18', 'nullable'],
+            'gelar_depan' => ['string', 'max:10', 'nullable'],
+            'first_name' => ['required', 'string', 'min:3', 'max:255'],
+            'last_name' => ['string', 'min:3', 'max:255', 'nullable'],
+            'gelar_belakang' => ['string', 'max:10', 'nullable'],
+            'gender' => ['required', 'string', 'max:1'],
+            'tgl_lahir' => ['required', 'date'],
+            'nakes_phone_number' => ['numeric', 'digits:12', 'nullable'],
+            'alamat' => ['string', 'max:255', 'nullable']
+        ]);
         $model = Nake::create($request->all());
         return $model;
     }
@@ -57,10 +77,9 @@ class NakeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function show($id)
-    // {
-
-    // }
+    public function show($id)
+    {
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -97,7 +116,6 @@ class NakeController extends Controller
     // }
     public function dataTable(Request $request)
     {
-
         if (request()->ajax()) {
             if (Auth::user()->role == 'faskes') {
                 $model = DB::table('isips')
@@ -163,6 +181,23 @@ class NakeController extends Controller
             return $datatables
                 ->rawColumns(['progress', 'action', 'status'])
                 ->toJson();
+        }
+    }
+    public function cariNakes(Request $request)
+    {
+        $request->validate([
+            'number' => ['required', 'numeric', 'digits:16']
+        ]);
+
+        $salah = $request->number;
+        // dd($salah);
+        $model = Nake::where("nik", "=", $request->number)
+            ->first();
+        if (isset($model)) {
+            // dd($model);
+            return $model;
+        } else {
+            return $salah;
         }
     }
 }

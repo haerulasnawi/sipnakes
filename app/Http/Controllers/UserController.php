@@ -83,17 +83,12 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->all());
         $request->validate([
             'password' => ['required', 'string', 'min:8', 'confirmed']
         ]);
         $model['password'] = $request->password;
-        // dd($model);
-        // $model['password'] = Hash::make($model['password']);
-        // dd($model);
         User::findOrFail($id)->update(['password' => Hash::make($model['password'])]);
         $request->session()->flash('success', 'Data Berhasil Diupdate!');
-        // return redirect()->route('home');
     }
 
     /**
@@ -107,15 +102,6 @@ class UserController extends Controller
     //     //
     // }
 
-    // public function json()
-    // {
-    //     $model = DB::table('users')->select([
-    //         DB::raw("CONCAT(users.id) as id"),
-    //         // DB::raw("CONCAT(users.first_name,' ',users.last_name) as full_name"),
-    //         'username', 'email', 'role'
-    //     ])->get();
-    //     return response()->json($model);
-    // }
     public function dataTable(Request $request)
     {
         if (request()->ajax()) {

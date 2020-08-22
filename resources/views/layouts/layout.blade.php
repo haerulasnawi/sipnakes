@@ -21,6 +21,7 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
     @stack('stylesheet')
     <!-- Start GA -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
@@ -46,6 +47,8 @@
     </div>
     @include('layouts._modal')
     
+
+    
 </body>
 <!-- General JS Scripts -->
 <script src="assets/modules/jquery.min.js"></script>
@@ -65,6 +68,8 @@
 <script src="assets/modules/summernote/summernote-bs4.js"></script>
 <script src="assets/modules/bootstrap-daterangepicker/daterangepicker.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+@include('sweetalert::alert')
+
 
 <!-- Page Specific JS File -->
 <script src="assets/js/page/modules-datatables.js"></script>
