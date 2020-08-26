@@ -4,7 +4,7 @@
 ])!!}
     <div class="form-group required">
     <label for="" class="control-label">Jenis Nakes</label>
-        {!!Form::select('jnakes', $jnakes, null, ['placeholder' => 'Pilih Jenis Nakes...','class'=>'form-control','id'=>'jnakes'])!!}
+        {!!Form::select('jnake_id', $jnakes, null, ['placeholder' => 'Pilih Jenis Nakes...','class'=>'form-control','id'=>'jnake_id'])!!}
     </div>
     <div class="form-group required">
         <label for="" class="control-label">NIK</label>

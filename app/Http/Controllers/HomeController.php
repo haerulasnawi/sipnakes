@@ -25,7 +25,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->role == 'guest') {
+        $user = Auth::user();
+
+        if (($user->role == 'guest') && ($user->nake == true)) {
+            $model = $user->nake;
+            $faske = $model->isip()->first()->faske->nama_faskes;
+            $nama = $model->gelar_depan . ' ' . $model->first_name . ' ' . $model->last_name . ' ' . $model->gelar_belakang;
+            $istr = ($model->istr == true) ? (($model->istr->str_ket == 1) ? 'Teregistrasi' : 'Belum Registrasi') : 'Belum Registrasi';
+            $model = ([
+                'Nama' => $nama,
+                'Profesi' => $model->jnake->nama_jnakes,
+                'Registrasi' => $istr,
+                'IzinPraktek' => $faske,
+            ]);
+            $model = (object)$model;
+            return view('blank', ['model' => $model]);
+        }
+        if ($user->role == 'guest') {
             // $u = Auth::user()->toJson();
 
             // dd($u);

@@ -12,7 +12,7 @@
         </a>             
         </div> --}}
 
-    <div class="card card-primary cari">
+    <div class="card card-primary">
         <div class="card-header">
             <h4>Cek Identitas</h4>
         </div>

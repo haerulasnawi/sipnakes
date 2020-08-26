@@ -1,3 +1,8 @@
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
 $('body').on('click', '.modal-show', function (event) {
     event.preventDefault();
     var me = $(this),
@@ -14,8 +19,7 @@ $('body').on('click', '.modal-show', function (event) {
             $('#nik').val(x).prop('readonly',true);            
         }
     });
-    $('#modal').modal('show');
-    
+    $('#modal').modal('show');    
 });
 $('#modal-button-save').click(function(event){
     event.preventDefault();
@@ -34,6 +38,7 @@ $('#modal-button-save').click(function(event){
             form.trigger('reset');
             $('#modal').modal('hide');
             $('#datatable').DataTable().ajax.reload();
+            location.reload();
             swal.fire(
                 'Yaay!',
                 ''+res+' Berhasil',
@@ -59,25 +64,18 @@ $('#modal-button-save').click(function(event){
 $('.form-control').keypress(function(event){
     if (event.which===13) {
     event.preventDefault();
-    $('.author-box').remove();
+    $('#dataidentitas').prop('hidden',true);
     $('.form-group').find('.invalid-feedback').remove();
     $('.form-group').find('.form-control').removeClass('is-invalid');
-    // var u=json_encode($model);
-    //             console.log(u.id);
-    var nik=$('input:text').val();
-    // console.log(nik);
     $.ajax({
         url:"/datasipnakes",
         method:'get',
         data:$('form').serialize(),
-        // data:{
-        //     text:$('#text').val()
-        // },
-        // dataType:"html",
         success:function(response) {
-            if (typeof response=="object") {                  
+            if (typeof response=="object") {
+                var dat=response;
                 Swal.fire({
-                    title: 'NIK sudah terdaftar',
+                    title: 'NIK sudah terdaftar atas nama:<br>'+dat.Nama,
                     text: "Apakah benar ini identitas milik anda?",
                     icon: 'success',
                     showCancelButton: true,
@@ -85,11 +83,45 @@ $('.form-control').keypress(function(event){
                     cancelButtonText: 'Tidak',
                   }).then((result) => {
                     if (result.value) {
-                      Swal.fire(
-                        'Berhasil!',
-                        'Data sudah di klaim.',
-                        'success'
-                      )
+                        swal.fire({
+                            title: 'Mohon bersabar..!',
+                            text: 'Sedang berusaha..',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                            allowEnterKey: false,
+                            onOpen: () => {
+                                swal.showLoading()
+                            }
+                        })
+                        $.ajax({
+                            url:'nakes/'+dat.id,
+                            method:'put',
+                            data:dat,
+                            // dataType : "html",
+                            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                            success:function(result) {
+                                Swal.fire(
+                                    result,
+                                    'Data sudah di klaim.',
+                                    'success'
+                                  )
+                                  $('.cari').remove();
+                                  $('#dataidentitas').removeAttr('hidden');
+                                  $.each(response,function(key,value){
+                                      $('#'+key)
+                                      .text(': '+value)
+                                  }); 
+                            },
+                            error:function(xhr){
+                                var res=xhr.responseJSON;
+                                console.log(res);
+                                // Swal.fire(
+                                //     'Gagal',
+                                //     'Data sudah di klaim.',
+                                //     'error'
+                                //   )
+                            }
+                        });                                             
                     } 
                   })
             }else{                
@@ -138,10 +170,3 @@ $('.form-control').keypress(function(event){
     });
 }
 });
-// $('.form-control').keypress(function(e){
-//     if (e.which===13) {
-//         e.preventDefault();
-//         $('#cariidentitas').click();
-        
-//     }
-// })
