@@ -7,8 +7,9 @@
     <meta id="token" name="csrf-token" content="{{ csrf_token() }}">
     <title>Document</title>
     <!-- General CSS Files -->
-    <link rel="stylesheet" href="public/assets/modules/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="public/assets/modules/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="assets/modules/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{asset('modules/bootstrap/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="assets/modules/fontawesome/css/all.min.css">
 
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="assets/modules/bootstrap-daterangepicker/daterangepicker.css">
