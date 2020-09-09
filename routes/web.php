@@ -14,7 +14,7 @@
 use App\Http\Controllers\NakeController;
 use Illuminate\Routing\RouteGroup;
 
-Route::get('/datasipnakes', 'NakeController@cariNakes');
+Route::get('/datasipnakes', 'KlaimController@cariNakes');
 Route::get('/', function () {
     return view('welcome');
 });
@@ -36,8 +36,7 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 
 // Route::get('/table/user_biasa', 'NakeController@dataTable')->name('table.user.biasa');
 Route::group(['middleware' => ['auth', 'checkrole:superadmin', 'verified']], function () {
-    //user route
-
+    Route::resource('/jnakes', 'JnakeController');
 });
 
 Route::group(['middleware' => ['auth', 'checkrole:,superadmin,admin', 'verified']], function () {

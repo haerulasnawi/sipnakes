@@ -44,4 +44,8 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(Faske::class);
     }
+    public function klaim()
+    {
+        return $this->belongsTo(Klaim::class);
+    }
 }

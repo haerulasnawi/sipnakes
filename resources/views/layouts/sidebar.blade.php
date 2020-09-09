@@ -57,9 +57,9 @@
                     <li> <a class="nav-link" href="{{route('persyaratan.index')}}"><i
                                 class="fas fa-file-medical"></i><span>
                                 Persyaratan</span></a></li>
-                    <li> <a class="nav-link" href=""><i
+                    <li> <a class="nav-link" href="{{route('jnakes.index')}}"><i
                                 class="fas fa-file-contract"></i><span>
-                                SIP</span></a></li>
+                                Nakes</span></a></li>
                 </ul>
             </li>
             @endif

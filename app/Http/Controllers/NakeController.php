@@ -7,7 +7,6 @@ use \App\Nake;
 use \App\Jnake;
 use \App\Faske;
 use App\Isip;
-use Dotenv\Validator;
 use Illuminate\Auth\Events\Validated;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
@@ -18,6 +17,7 @@ use Illuminate\Support\Str;
 use phpDocumentor\Reflection\Types\Null_;
 use PhpParser\Node\Stmt\Return_;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
 
 // use DataTables;
 
@@ -109,23 +109,24 @@ class NakeController extends Controller
     public function update(Request $request, $id)
     {
 
-        $model = Auth::user()->id;
-        $request->request->add(['user_id' => strval($model)]);
+        // $model = Auth::user()->id;
+        // $request->request->add(['user_id' => strval($model)]);
         // dd($request);
-        // $validator = Validator::create($request->all(), [
+        // $validator = Validator::make($request->all(), [
         //     'user_id' => ['unique:nakes']
         // ]);
-        // $request->validate([
-        //     'user_id' => ['unique:nakes']
-        // ]);
+        // dd($validator);
+        $model = Nake::where("nik", "=", $request->nik)
+            ->first();
+        dd($model);;
         // $model = Nake::find($id);
-        // if (($request->Registrasi == true) && ($model->user_id != true)) {
-        //     $model = Nake::find($id);
-        //     $model->user_id = Auth::user()->id;
-        //     dd($model);
-        //     $model->update();
-        //     return response('Berhasil');
-        // }
+        if (($request->Registrasi == true) && ($model->user_id != true)) {
+            $model = Nake::find($id);
+            $model->user_id = Auth::user()->id;
+            dd($model);
+            $model->update();
+            return response('Berhasil');
+        }
     }
 
     /**
@@ -221,7 +222,7 @@ class NakeController extends Controller
             $nama = $model->gelar_depan . ' ' . $model->first_name . ' ' . $model->last_name . ' ' . $model->gelar_belakang;
             $istr = ($model->istr == true) ? (($model->istr->str_ket == 1) ? 'Teregistrasi' : 'Belum Registrasi') : 'Belum Registrasi';
             $model = ([
-                'id' => $id,
+                // 'id' => $id,
                 'nik' => $nik,
                 'Nama' => $nama,
                 'Profesi' => $model->jnake->nama_jnakes,
