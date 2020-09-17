@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Http;
+
 use App\Http\Controllers\NakeController;
 use Illuminate\Routing\RouteGroup;
 
@@ -18,7 +20,15 @@ Route::get('/datasipnakes', 'KlaimController@cariNakes');
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/curl', function () {
+    $response = Http::get('http://sisdmk.kemkes.go.id/sdmk/id_sub_rumpun_pekerjaan', [
+        'name' => 'id_rumpun_pekerjaan',
+        'page' => 1
+    ]);
 
+    dd($response->body());
+    // return $response;
+});
 //istr roure
 Route::resource('/str', 'IstrController');
 Route::post('table/str', 'IstrController@dataTable')->name('table.str');

@@ -33,7 +33,7 @@
         <div class="alert alert-success">
             <div class="alert-title">Berhasil</div>
             Mohon menunggu persetujuan klaim data! 
-          </div>
+            </div>
         <div class="card author-box card-primary">
             <div class="card-body">
                 {{-- <div class="author-box-left">
