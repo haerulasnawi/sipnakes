@@ -81,7 +81,7 @@ $('.form-control').keypress(function(event){
                     showCancelButton: true,
                     confirmButtonText: 'Ya, Klaim NIK ini!',
                     cancelButtonText: 'Tidak',
-                  }).then((result) => {
+                     }).then((result) => {
                     if (result.value) {
                         swal.fire({
                             title: 'Mohon bersabar..!',
