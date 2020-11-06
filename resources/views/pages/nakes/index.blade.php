@@ -40,8 +40,8 @@
                         </select>
                     </div>
                     <div class="form-group col-md-3">
-                        <label for="nik">NIK</label>
-                        <input type="text" name="nik" id="nik" class="form-control" placeholder="Cari NIK">
+                        <label for="nik_cari">NIK</label>
+                        <input type="text" name="nik_cari" id="nik_cari" class="form-control" placeholder="Cari NIK">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="nip">NIP</label>
@@ -55,7 +55,7 @@
                     <div class="form-row">
                     <div class="form-group col-md-2">
                         <label for="gender">Jenis Kelamin</label>
-                        <select name="gender" id="gender" class="form-control">
+                        <select name="gender_cari" id="gender_cari" class="form-control">
                         <option value="">==Pilih Jenis Kelamin==</option>
                         <option value="L">Laki-laki</option>
                         <option value="P">Perempuan</option>
@@ -71,8 +71,8 @@
                         </select>
                     </div>
                     <div class="form-group col-md-3">
-                        <label for="full_name">Faskes</label>
-                        <select name="full_name" id="full_name" class="form-control">
+                        <label for="faskes">Faskes</label>
+                        <select name="faskes" id="faskes" class="form-control">
                         <option value="">==Pilih Faskes==</option>
                         <option value="1">Aktif</option>
                         <option value="2">Tidak Aktif</option>

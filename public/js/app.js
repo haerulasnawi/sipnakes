@@ -16,49 +16,87 @@ $('body').on('click', '.modal-show', function (event) {
         success: function (response) {
             $('#modal-body').html(response);
             var x= $('#number').val();
-            $('#nik').val(x).prop('readonly',true);            
+            if (x==true) {
+                $('#nik').val(x).prop('readonly',true);    
+            }
         }
     });
     $('#modal').modal('show');    
 });
 $('#modal-button-save').click(function(event){
     event.preventDefault();
-    var form= $('#modal-body form'),
-        url = form.attr('action'),
+        var form= $('#modal-body form');
+        url = form.attr('action');
         method = $('input[name=_method]').val() == undefined ? 'POST' : 'PUT';
         form.find('.invalid-feedback').remove();
         form.find('.form-control').removeClass('is-invalid');
-        // console.log(url);
         res=$('#modal-title').text();
-    $.ajax({
-        url:url,
-        method:method,
-        data:form.serialize(),
-        success:function(response){
-            form.trigger('reset');
-            $('#modal').modal('hide');
-            $('#datatable').DataTable().ajax.reload();
-            location.reload();
-            swal.fire(
-                'Yaay!',
-                ''+res+' Berhasil',
-                'success'
-            );
-        },
-        error:function(xhr){
-            var res=xhr.responseJSON;
-            // console.log(res);
-            if($.isEmptyObject(res)==false){    
-                $.each(res.errors,function(key,value){
-                    $('#'+key)
-                    .closest('.form-control')
-                    .addClass('is-invalid')
-                    // .append('<span class="help-block"><strong>' + value + '</strong></span>')
-                    .after('<div class="invalid-feedback">' + value + '</div>')
-                });
+        var x =$('#str_file');
+    if (x.length) {
+        var form= new FormData(form[0]);
+        $.ajax({
+            url:url,
+            method:method,
+            data:form,
+            contentType:false,
+            processData:false,
+            success:function(){
+                form.trigger('reset');
+                $('#modal').modal('hide');
+                $('#datatable').DataTable().ajax.reload();
+                location.reload();
+                swal.fire(
+                    'Yaay!',
+                    ''+res+' Berhasil',
+                    'success'
+                );
+            },
+            error:function(xhr){
+                var res=xhr.responseJSON;
+                // console.log(res);
+                if($.isEmptyObject(res)==false){    
+                    $.each(res.errors,function(key,value){
+                        $('#'+key)
+                        .closest('.form-control')
+                        .addClass('is-invalid')
+                        // .append('<span class="help-block"><strong>' + value + '</strong></span>')
+                        .after('<div class="invalid-feedback">' + value + '</div>')
+                    });
+                }
             }
-        }
-    })
+        })
+    }else{
+        $.ajax({
+            url:url,
+            method:method,
+            data:form.serialize(),
+            success:function(){
+                form.trigger('reset');
+                $('#modal').modal('hide');
+                $('#datatable').DataTable().ajax.reload();
+                // location.reload();
+                swal.fire(
+                    'Yaay!',
+                    ''+res+' Berhasil',
+                    'success'
+                );
+            },
+            error:function(xhr){
+                var res=xhr.responseJSON;
+                // console.log(res);
+                if($.isEmptyObject(res)==false){    
+                    $.each(res.errors,function(key,value){
+                        $('#'+key)
+                        .closest('.form-control')
+                        .addClass('is-invalid')
+                        // .append('<span class="help-block"><strong>' + value + '</strong></span>')
+                        .after('<div class="invalid-feedback">' + value + '</div>')
+                    });
+                }
+            }
+        })
+    }
+    
 });
 // $('#cariidentitas').click(function(event){
 $('.form-control').keypress(function(event){
@@ -137,7 +175,12 @@ $('.form-control').keypress(function(event){
                     cancelButtonText: 'Tidak',
                   }).then((result) => {
                     if (result.value) {
-                        $('#cariidentitas').click();                        
+                        $('#cariidentitas').click(); 
+                        
+                        
+
+
+                        
                     } else if (
                       /* Read more about handling dismissals below */
                       result.dismiss === Swal.DismissReason.cancel

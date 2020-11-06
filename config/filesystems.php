@@ -26,7 +26,8 @@ return [
     |
     */
 
-    'cloud' => env('FILESYSTEM_CLOUD', 's3'),
+    // 'cloud' => env('FILESYSTEM_CLOUD', 's3'),
+    'cloud' => 'google',
 
     /*
     |--------------------------------------------------------------------------
@@ -71,6 +72,10 @@ return [
             'folderId' => env('GOOGLE_DRIVE_FOLDER_ID'),
             // 'teamDriveId' => env('GOOGLE_DRIVE_TEAM_DRIVE_ID'),
         ],
+        'dropbox'=>[
+            'Driver'=>'dropbox',
+            'authorizationToken'=>env('DROPBOX_ACCESS_TOKEN')
+        ]
 
     ],
 

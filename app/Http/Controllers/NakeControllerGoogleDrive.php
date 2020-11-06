@@ -107,7 +107,20 @@ class NakeController extends Controller
             $faskes=Auth::user()->faske->id;
             $strFileName='str-' . $nik . '-' . date('j' . '-' . 'm' . '-' . 'o') . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
             // dd($strFileName);
-            
+            $dir = collect(Storage::drive('google')->listContents('1IHg3oXvB6bwUpNy2lusXM67h_7nlfZv3/', false))
+            ->where('type', '=', 'dir')
+            ->where('name', '=', $nik)
+            ->first(); // There could be duplicate directory names!
+            dd($dir);   
+            Storage::drive('google')->putFileAs($dir['path'], $file, $strFileName);
+            $file = collect(Storage::drive('google')->listContents($dir['path'], false))
+                ->where('type', '=', 'file')
+                ->where('name', '=', $strFileName)
+                ->first();
+            $service = Storage::drive('google')->getAdapter()->getService();
+
+            $model = Nake::create($request->all());
+            //MEMBUAT STR
         
         }
         return $model;

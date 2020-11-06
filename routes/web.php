@@ -12,6 +12,7 @@
 */
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 
 use App\Http\Controllers\NakeController;
 use Illuminate\Routing\RouteGroup;
@@ -76,3 +77,17 @@ Route::group(['middleware' => ['auth', 'checkrole:faskes', 'verified']], functio
         return view('pages.faskes.profile.index');
     })->name('profile.faskes');
 });
+
+
+
+
+
+
+// Route::get('list', function() {
+//     $dir = '/';
+//     $recursive = false; // Get subdirectories also?
+//     $contents = collect(Storage::drive('google')->listContents($dir, $recursive));
+
+//     //return $contents->where('type', '=', 'dir'); // directories
+//     return $contents->where('type', '=', 'file'); // files
+// });
