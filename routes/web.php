@@ -13,6 +13,9 @@
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Dropbox\Client;
+use Illuminate\Http\Request;
+use League\Flysystem\Filesystem;
 
 use App\Http\Controllers\NakeController;
 use Illuminate\Routing\RouteGroup;
@@ -81,13 +84,14 @@ Route::group(['middleware' => ['auth', 'checkrole:faskes', 'verified']], functio
 
 
 
+// Route::get('list','DropFileController@index');
 
+Route::get('/list', function() {
+dd(Storage::disk('dropbox')->listContents());
+    // $dir = '/';
+    // $recursive = false; // Get subdirectories also?
+    // $contents = collect(Storage::drive('google')->listContents($dir, $recursive));
 
-// Route::get('list', function() {
-//     $dir = '/';
-//     $recursive = false; // Get subdirectories also?
-//     $contents = collect(Storage::drive('google')->listContents($dir, $recursive));
-
-//     //return $contents->where('type', '=', 'dir'); // directories
-//     return $contents->where('type', '=', 'file'); // files
-// });
+    // return $contents->where('type', '=', 'dir'); // directories
+    // return $contents->where('type', '=', 'file'); // files
+});
