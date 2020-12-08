@@ -204,9 +204,9 @@
     margin-left:4px;
     margin-right:4px
     }
-    tr .text-center{
+    /* tr .text-center{
 
-    }
+    } */
 </style>
 @endpush
 @push('script_bottom')

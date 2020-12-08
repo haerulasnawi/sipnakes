@@ -75,12 +75,12 @@ $('#modal-button-save').click(function(event){
                 form.trigger('reset');
                 $('#modal').modal('hide');
                 $('#datatable').DataTable().ajax.reload();
-                // location.reload();
-                swal.fire(
+                Swal.fire(
                     'Yaay!',
                     ''+res+' Berhasil',
                     'success'
                 );
+                location.reload();
             },
             error:function(xhr){
                 var res=xhr.responseJSON;

@@ -3,7 +3,7 @@
     'method'=>'post',
     'files'=>'true'
 ])!!}
-    <div class="form-group required">
+    <!-- <div class="form-group required">
     <label for="" class="control-label">Kategori</label>
         {!!Form::select('', $jnakes, null, ['placeholder' => 'Pilih Rumpun...','class'=>'form-control','id'=>''])!!}
     </div>
@@ -22,10 +22,10 @@
     <div class="form-group required">
     <label for="" class="control-label">Status Kepegawaian SDMK</label>
         {!!Form::select('', $jnakes, null, ['placeholder' => 'Pilihan...','class'=>'form-control','id'=>''])!!}
-    </div>
+    </div> -->
     <div class="form-group required">
     <label for="" class="control-label">Jenis SDMK</label>
-        {!!Form::select('', $jnakes, null, ['placeholder' => 'Pilihan...','class'=>'form-control','id'=>''])!!}
+        {!!Form::select('jnake_id', $jnakes, null, ['placeholder' => 'Pilihan...','class'=>'form-control','id'=>'jnake_id'])!!}
     </div>
     <div class="form-group required">
         <label for="" class="control-label">NIK</label>

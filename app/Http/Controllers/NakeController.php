@@ -60,9 +60,9 @@ class NakeController extends Controller
     {
         // dd($request);
         // dd($request->file('str_file'));
-        if (Auth::user()->role=='admin'||'faskes') {
+        if (Auth::user()->role ===('admin'||'faskes')) {
             $request->validate([
-                // 'user_id' => ['numeric', 'max:2', 'unique:nakes', 'nullable'],
+                'user_id' => ['numeric', 'max:2', 'unique:nakes', 'nullable'],
                 'jnake_id' => ['required', 'numeric', 'max:2'],
                 'nik' => ['required', 'numeric', 'digits:16', 'unique:nakes'],
                 'nip' => ['numeric', 'digits:18', 'nullable'],
@@ -83,6 +83,7 @@ class NakeController extends Controller
                 'sip_file'=>['required','mimes:pdf']
             ]);
         }
+
         $request->validate([
             // 'user_id' => ['numeric', 'max:2', 'unique:nakes', 'nullable'],
             'jnake_id' => ['required', 'numeric', 'max:2'],
@@ -143,14 +144,6 @@ class NakeController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        // $model = Auth::user()->id;
-        // $request->request->add(['user_id' => strval($model)]);
-        // dd($request);
-        // $validator = Validator::make($request->all(), [
-        //     'user_id' => ['unique:nakes']
-        // ]);
-        // dd($validator);
         $model = Nake::where("nik", "=", $request->nik)
             ->first();
         dd($model);;

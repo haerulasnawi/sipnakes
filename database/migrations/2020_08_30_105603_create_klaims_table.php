@@ -18,6 +18,7 @@ class CreateKlaimsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->integer('nake_id');
             $table->string('ktp_link');
+            $table->string('str_link')->nullable();
             $table->enum('ket', [1, 0])->nullable();
             $table->timestamps();
         });

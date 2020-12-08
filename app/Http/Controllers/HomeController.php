@@ -26,10 +26,16 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-
         if (($user->role == 'guest') && ($user->nake == true)) {
-            $model = $user->nake;
-            $faske = $model->isip()->first()->faske->nama_faskes;
+            return view("pages.nakes.profile.index");
+        }
+        if (($user->role == 'guest') && ($user->klaim == true)) {
+            $model = $user->klaim->nake;
+            if (isset($model->isip()->first()->faske->nama_faskes)) {
+                $faske = $model->isip()->first()->faske->nama_faskes;
+            }else {
+                $faske="";
+            }
             $nama = $model->gelar_depan . ' ' . $model->first_name . ' ' . $model->last_name . ' ' . $model->gelar_belakang;
             $istr = ($model->istr == true) ? (($model->istr->str_ket == 1) ? 'Teregistrasi' : 'Belum Registrasi') : 'Belum Registrasi';
             $model = ([

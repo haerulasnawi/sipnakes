@@ -18,7 +18,12 @@ class KlaimController extends Controller
         if (isset($model)) {
             $nik = $model->nik;
             $id = (Auth::user()) ? ($model->id) : '0';
-            $faske = $model->isip()->first()->faske->nama_faskes;
+            if (isset($model->isip()->first()->faske->nama_faskes)) {
+                $faske = $model->isip()->first()->faske->nama_faskes;
+            }else {
+                $faske="";
+            }
+            
             $nama = $model->gelar_depan . ' ' . $model->first_name . ' ' . $model->last_name . ' ' . $model->gelar_belakang;
             $istr = ($model->istr == true) ? (($model->istr->str_ket == 1) ? 'Teregistrasi' : 'Belum Registrasi') : 'Belum Registrasi';
             $model = ([
