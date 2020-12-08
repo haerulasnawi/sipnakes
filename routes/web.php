@@ -38,6 +38,9 @@ Route::get('/curl', function () {
 Route::resource('/str', 'IstrController');
 Route::post('table/str', 'IstrController@dataTable')->name('table.str');
 
+Route::resource('/sip', 'IsipController');
+Route::post('table/sip', 'IsipController@dataTable')->name('table.sip');
+
 //pengaturan
 Route::resource('/persyaratan', 'RequirementController');
 Route::post('/table/peryaratan', 'RequirementController@dataTable')->name('table.persyaratan');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Istr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -24,10 +25,11 @@ class IstrController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function create()
-    // {
-    //     //
-    // }
+    public function create()
+    {
+        $model=new Istr;
+        return view('pages.nakes.formStr',compact('model'));
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -35,10 +37,17 @@ class IstrController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // public function store(Request $request)
-    // {
-    //     //
-    // }
+    public function store(Request $request)
+    {
+        $request->validate([
+            'str_nomor'=>['required'],
+            'str_terbit'=>['required','date'],
+            'str_exp'=>['required','date'],
+            // 'str_file'=>['required','mimes:pdf'],
+        ]);
+        $model = Istr::create(array_merge($request->all(), ['nake_id' => Auth::user()->nake->id,'jnake_id'=>Auth::user()->nake->jnake_id]));
+        return $model;
+    }
 
     /**
      * Display the specified resource.

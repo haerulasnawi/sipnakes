@@ -25,6 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // dd(Auth::user()->role);
         $user = Auth::user();
         if (($user->role == 'guest') && ($user->nake == true)) {
             return view("pages.nakes.profile.index");

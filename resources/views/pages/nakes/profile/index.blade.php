@@ -17,10 +17,6 @@
 <section class="section">
 <div class="section-header">
     <h1>Profile</h1>
-    <div class="section-header-breadcrumb">
-        <div class="breadcrumb-item active"><a href="">Dashboard</a></div>
-        <div class="breadcrumb-item">Profile</div>
-    </div>
 </div>
 <div class="section-body">
     <h2 class="section-title">Hi, {{ Auth::user()->nake->first_name}} !</h2>
@@ -125,7 +121,7 @@
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-6 text-right">
                             <div class="buttons">
-                                <a href="#" class="btn btn-icon btn-primary">
+                                <a href="{{route('str.create')}}" class="btn btn-icon btn-primary modal-show"title="Tambah STR">
                                     <i class="fas fa-plus"></i>
                                 </a>
                             </div>
@@ -163,7 +159,7 @@
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-6 text-right">
                             <div class="buttons">
-                                <a href="#" class="btn btn-icon btn-primary"><i class="fas fa-plus"></i></a>
+                                <a href="" class="btn btn-icon btn-primary modal-show"><i class="fas fa-plus"></i></a>
                             </div>
                         </div>
                     </div>
@@ -260,7 +256,7 @@ $('#str_datatable').DataTable({
         serverSide: true,
         ajax:
         {
-        url:"{{route('table.str')}}",
+        url:"{{route('table.sip')}}",
         type:'post'
         },
         columns: [

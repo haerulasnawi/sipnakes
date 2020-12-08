@@ -100,14 +100,15 @@ class NakeController extends Controller
         ]);
         if (Auth::user()->role == 'guest') {
             $model = Nake::create(array_merge($request->all(), ['user_id' => Auth::user()->id]));
+           
         }
         if (Auth::user()->role != 'guest') {
             //UPLOAD Berkas
-            $file=$request->file('str_file');
-            $nik=$request->nik;
-            $faskes=Auth::user()->faske->id;
-            $strFileName='str-' . $nik . '-' . date('j' . '-' . 'm' . '-' . 'o') . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
-            // dd($strFileName);
+            // $file=$request->file('str_file');
+            // $nik=$request->nik;
+            // $faskes=Auth::user()->faske->id;
+            // $strFileName='str-' . $nik . '-' . date('j' . '-' . 'm' . '-' . 'o') . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
+            // // dd($strFileName);
             
         
         }
