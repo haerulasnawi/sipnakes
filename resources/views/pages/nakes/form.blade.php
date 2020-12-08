@@ -5,27 +5,27 @@
 ])!!}
     <div class="form-group required">
     <label for="" class="control-label">Kategori</label>
-        {!!Form::select('jnake_id', $jnakes, null, ['placeholder' => 'Pilih Rumpun...','class'=>'form-control','id'=>'jnake_id'])!!}
+        {!!Form::select('', $jnakes, null, ['placeholder' => 'Pilih Rumpun...','class'=>'form-control','id'=>''])!!}
     </div>
     <div class="form-group required">
     <label for="" class="control-label">Rumpun SDMK</label>
-        {!!Form::select('', $jnakes, null, ['placeholder' => 'Pilihan...','class'=>'form-control','id'=>'jnake_id'])!!}
+        {!!Form::select('', $jnakes, null, ['placeholder' => 'Pilihan...','class'=>'form-control','id'=>''])!!}
     </div>
     <div class="form-group required">
     <label for="" class="control-label">Sub Rumpun SDMK</label>
-        {!!Form::select('', $jnakes, null, ['placeholder' => 'Pilihan...','class'=>'form-control','id'=>'jnake_id'])!!}
+        {!!Form::select('', $jnakes, null, ['placeholder' => 'Pilihan...','class'=>'form-control','id'=>''])!!}
     </div>
     <div class="form-group required">
     <label for="" class="control-label">Grup Status Kepegawaian</label>
-        {!!Form::select('', $jnakes, null, ['placeholder' => 'Pilihan...','class'=>'form-control','id'=>'jnake_id'])!!}
+        {!!Form::select('', $jnakes, null, ['placeholder' => 'Pilihan...','class'=>'form-control','id'=>''])!!}
     </div>
     <div class="form-group required">
     <label for="" class="control-label">Status Kepegawaian SDMK</label>
-        {!!Form::select('', $jnakes, null, ['placeholder' => 'Pilihan...','class'=>'form-control','id'=>'jnake_id'])!!}
+        {!!Form::select('', $jnakes, null, ['placeholder' => 'Pilihan...','class'=>'form-control','id'=>''])!!}
     </div>
     <div class="form-group required">
     <label for="" class="control-label">Jenis SDMK</label>
-        {!!Form::select('', $jnakes, null, ['placeholder' => 'Pilihan...','class'=>'form-control','id'=>'jnake_id'])!!}
+        {!!Form::select('', $jnakes, null, ['placeholder' => 'Pilihan...','class'=>'form-control','id'=>''])!!}
     </div>
     <div class="form-group required">
         <label for="" class="control-label">NIK</label>
@@ -61,7 +61,8 @@
             {{ Form::date('tgl_lahir', null, ['class' => 'form-control','id'=>'tgl_lahir']) }}
             <!-- {{-- {{ Form::text('deadline', null, ['class' => 'form-control', 'id'=>'datetimepicker']) }} --}} -->
     </div>
-    @if(Auth::user()->role=='admin'||'faskes')
+
+    @if(Auth::user()->role ===('admin'||'faskes'))
     <div class="form-group required">
         <label for="" class="control-label">Nomor STR</label>
         {!!Form::text('str_nomor',null,['class'=>'form-control','id'=>'str_nomor'])!!}
@@ -95,6 +96,7 @@
         {{Form::file('sip_file',['class'=>'form-control','id'=>'sip_file','accept'=>'application/pdf'])}}
     </div>
     @endif
+
     <div class="form-group">
         <label for="" class="control-label">Kontak</label>
         {!!Form::text('nakes_phone_number',null,['class'=>'form-control','id'=>'nakes_phone_number'])!!}

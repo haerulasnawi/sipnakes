@@ -16,9 +16,10 @@ $('body').on('click', '.modal-show', function (event) {
         success: function (response) {
             $('#modal-body').html(response);
             var x= $('#number').val();
-            if (x==true) {
-                $('#nik').val(x).prop('readonly',true);    
+            if (x!=null) {
+                $('#nik').val(x).prop('readonly',true);
             }
+            
         }
     });
     $('#modal').modal('show');    
@@ -177,9 +178,6 @@ $('.form-control').keypress(function(event){
                     if (result.value) {
                         $('#cariidentitas').click(); 
                         
-                        
-
-
                         
                     } else if (
                       /* Read more about handling dismissals below */

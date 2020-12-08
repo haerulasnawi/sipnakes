@@ -113,7 +113,7 @@ class NakeController extends Controller
             ->first(); // There could be duplicate directory names!
             dd($dir);   
             Storage::drive('google')->putFileAs($dir['path'], $file, $strFileName);
-            $file = collect(Storage::drive('google')->listContents($dir['path'], false))
+            $file = collect(Storage::drive('google')->listContents($dir['path'], false))    
                 ->where('type', '=', 'file')
                 ->where('name', '=', $strFileName)
                 ->first();

@@ -32,5 +32,6 @@ class KlaimController extends Controller
             // return response($model)->header('Content-Type', 'text/plain');
             return $model;
         }
+        return $request->number;
     }
 }
