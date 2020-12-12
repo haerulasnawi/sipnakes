@@ -171,8 +171,9 @@
                             <tr class="text-center head_blue">
                             <th>doc</th>
                             <th>Nomor</th>
-                            <th>Created At</th>
-                            <th>Expired At</th>
+                            <th>Jenis Nakes</th>
+                            <th>Faskes</th>
+                            <th>sip Aktif</th>
                             <th>Status</th>
                             <th>Action</th>
                             </tr>
@@ -261,9 +262,10 @@ $('#str_datatable').DataTable({
         },
         columns: [
             {data:'DT_RowIndex', name: 'DT_RowIndex'},
-            {data:'str_nomor',name:'str_nomor'},
-            {data:'str_terbit',name:'str_terbit'},
-            {data:'str_exp',name:'str_exp'},
+            {data:'sip_nomor',name:'sip_nomor'},
+            {data:'nama_jnakes',name:'nama_jnakes'},
+            {data:'nama_faskes',name:'nama_faskes'},
+            {data:'sip_aktif',name:'sip_aktif'},
             {data:'status',name:'status'},
             {data:'action',name:'id',searchable:false}
         ],

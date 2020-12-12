@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 
 class IsipController extends Controller
 {
@@ -81,4 +84,28 @@ class IsipController extends Controller
     // {
     //     //
     // }
+
+
+    public function dataTable(Request $request)
+    {
+        if (request()->ajax()) {
+            $model = DB::table('isips')
+            ->join('nakes','nakes.id','=','isips.nake_id')
+            ->join('faskes','faskes.id','=','isips.faske_id')
+            ->join('jnakes','jnakes.id','=','isips.jnake_id')
+            ->select([DB::raw("CONCAT(isips.id) as id"), 'sip_nomor', 'sip_aktif', 'nama_faskes', 'nama_jnakes','nake_id'])
+                ->where('nake_id', '=', Auth::user()->nake->id);
+            // dd($model);
+            return DataTables::of($model)
+                ->addIndexColumn()
+                ->addColumn('status', function ($model) {
+                    return '<a href="" class="btn btn-outline-secondary " title="Detail: ' . $model->id . '"><i class="far fa-eye"> Detail</i></a>';
+                })
+                ->addColumn('action', function ($model) {
+                    return '<a href="' . route('nakes.show', $model->id) . '" class="btn btn-secondary " title="Detail: ' . $model->id . '"><i class="far fa-eye"></i></a>';
+                })
+                ->rawColumns(['status', 'action'])
+                ->make(true);
+        }
+    }
 }
