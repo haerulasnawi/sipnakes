@@ -74,8 +74,9 @@ return [
         ],
         'dropbox'=>[
             'driver'=>'dropbox',
-            'authorizationToken'=>env('DROPBOX_ACCESS_TOKEN')
-            // 'clientId'=>env
+            'authorizationToken'=>env('DROPBOX_ACCESS_TOKEN'),
+            'appKey'=>env('APP_KEY'),
+            'appSecret'=>env('APP_SECRET')
         ],
     ],
 

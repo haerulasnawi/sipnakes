@@ -91,18 +91,10 @@ Route::group(['middleware' => ['auth', 'checkrole:faskes', 'verified']], functio
 // Route::get('list','DropFileController@index');
 
 Route::get('/list', function() {
-    Storage::disk('local')->put('file.txt', 'Contents');
-    // echo asset('storage/file.txt');
-
-    // $client = new Client("Xn75YI8H824AAAAAAAAAAW_LaPdFoT7DuLPx7xwLn0seBIvMthS_ss9OSOTSLhF5");
-    // // $row=$client->listFolder("/");
-    // dd($client->getTemporaryLink("/new/Untitled.gdoc"));
-
-// dd(Storage::disk('dropbox')->listContents());  
-    // $dir = '/';
-    // $recursive = false; // Get subdirectories also?
-    // $contents = collect(Storage::drive('google')->listContents($dir, $recursive));
-
-    // return $contents->where('type', '=', 'dir'); // directories
-    // return $contents->where('type', '=', 'file'); // files
+    $client = new Spatie\Dropbox\Client('mA2b5ITMl78AAAAAAAAAAUSo8Yo66xPhfvAt7jpJcgVY6aDucjKbtXFz-hC6BJLS');
+    $client=Storage::disk('dropbox')->get('/');
+    // $client = new Spatie\Dropbox\Client(['1ajsglc9co7o5af','6mm5w7qmg2jui5l']);
+    // $client = new Spatie\Dropbox\Client(['6mm5w7qmg2jui5l']);
+    // $client=$client->listFolder('/');
+    return $client;
 });

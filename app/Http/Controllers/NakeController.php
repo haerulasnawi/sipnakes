@@ -20,6 +20,7 @@ use phpDocumentor\Reflection\Types\Null_;
 use PhpParser\Node\Stmt\Return_;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Dropbox\Client;
 
 // use DataTables;
 
@@ -99,6 +100,8 @@ class NakeController extends Controller
             'alamat' => ['string', 'max:255', 'nullable']
         ]);
         if (Auth::user()->role == 'guest') {
+            $dirName=$request->nik;
+           
             $model = Nake::create(array_merge($request->all(), ['user_id' => Auth::user()->id]));
            
         }
@@ -147,7 +150,7 @@ class NakeController extends Controller
     {
         $model = Nake::where("nik", "=", $request->nik)
             ->first();
-        dd($model);;
+        // dd($model);;
         // $model = Nake::find($id);
         if (($request->Registrasi == true) && ($model->user_id != true)) {
             $model = Nake::find($id);

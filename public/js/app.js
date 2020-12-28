@@ -38,19 +38,21 @@ $('#modal-button-save').click(function(event){
         $.ajax({
             url:url,
             method:method,
-            data:form,
+            data:form.serialize(),
             contentType:false,
             processData:false,
             success:function(){
                 form.trigger('reset');
                 $('#modal').modal('hide');
                 $('#datatable').DataTable().ajax.reload();
-                location.reload();
+                $('#sip_datatable').DataTable().ajax.reload();
+                $('#str_datatable').DataTable().ajax.reload();
                 swal.fire(
                     'Yaay!',
                     ''+res+' Berhasil',
                     'success'
                 );
+                location.reload();
             },
             error:function(xhr){
                 var res=xhr.responseJSON;

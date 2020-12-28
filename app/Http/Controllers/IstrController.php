@@ -6,6 +6,7 @@ use App\Istr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 
 class IstrController extends Controller
@@ -43,10 +44,20 @@ class IstrController extends Controller
             'str_nomor'=>['required'],
             'str_terbit'=>['required','date'],
             'str_exp'=>['required','date'],
-            // 'str_file'=>['required','mimes:pdf'],
+            'str_file'=>['required','mimes:pdf'],
         ]);
-        $model = Istr::create(array_merge($request->all(), ['nake_id' => Auth::user()->nake->id,'jnake_id'=>Auth::user()->nake->jnake_id]));
-        return $model;
+        $ext=$request->file('str_file')->getClientOriginalExtension();
+        $nik=Auth::user()->nake->nik;
+        $nameStr='str_'.$nik.'_'.$request->str_exp.'.'.$ext;
+        $data=Storage::putFileAs('nakes/'.$nik,$request->file('str_file'),$nameStr);
+        $model = Istr::create(array_merge($request->all(), [
+            'nake_id' => Auth::user()->nake->id,
+            'jnake_id'=>Auth::user()->nake->jnake_id,
+            'str_name'=>$nameStr,
+            'str_link'=>url($data),
+            'str_size'=>Storage::size($data)
+            ]));
+        return redirect()->back()->withInput();
     }
 
     /**

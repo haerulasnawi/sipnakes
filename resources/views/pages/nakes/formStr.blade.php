@@ -17,8 +17,8 @@
             <!-- {{-- {!!Form::date('str_exp',['class'=>'form-control'])!!} --}} -->
             {{ Form::date('str_exp', null, ['class' => 'form-control','id'=>'str_exp']) }}
     </div>
-    <!-- <div class="form-group required">
+    <div class="form-group required">
         <label for="" class="control-label">Dokumen STR</label>
         {{Form::file('str_file',['class'=>'form-control','id'=>'str_file'])}}
-    </div>   -->
+    </div>  
 {!!Form::close()!!}
