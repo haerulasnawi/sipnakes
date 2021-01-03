@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Istr;
+use DateInterval;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\DataTables;
+use DateTime;
 
 class IstrController extends Controller
 {
@@ -40,24 +44,45 @@ class IstrController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'str_nomor'=>['required'],
-            'str_terbit'=>['required','date'],
-            'str_exp'=>['required','date'],
-            'str_file'=>['required','mimes:pdf'],
-        ]);
-        $ext=$request->file('str_file')->getClientOriginalExtension();
-        $nik=Auth::user()->nake->nik;
-        $nameStr='str_'.$nik.'_'.$request->str_exp.'.'.$ext;
-        $data=Storage::putFileAs('nakes/'.$nik,$request->file('str_file'),$nameStr);
-        $model = Istr::create(array_merge($request->all(), [
-            'nake_id' => Auth::user()->nake->id,
-            'jnake_id'=>Auth::user()->nake->jnake_id,
-            'str_name'=>$nameStr,
-            'str_link'=>url($data),
-            'str_size'=>Storage::size($data)
-            ]));
-        return redirect()->back()->withInput();
+        $data=DB::table('istrs')->orderBy('str_mass','desc')->first();
+        if ($data==null||($data->str_mass)<=60) {
+            $request->validate([
+                'str_nomor'=>['required'],
+                'str_terbit'=>['required','date'],
+                'str_exp'=>['required','date'],
+                'str_file'=>['required','mimes:pdf'],
+            ]);
+            $ext=$request->file('str_file')->getClientOriginalExtension();
+            $nik=Auth::user()->nake->nik;
+            $nameStr='str_'.$nik.'_'.$request->str_exp.'.'.$ext;
+            $data=Storage::putFileAs('nakes/'.$nik,$request->file('str_file'),$nameStr);
+            $tgl_exp=new DateTime($request->str_exp);
+            $tgl_now=new DateTime("now");
+            $mass=$tgl_now->diff($tgl_exp);
+            $mass=$mass->format("%r%a");
+            if ($mass<=0) {
+                return response(['info','Opss','Str anda sudah tidak aktif, mohon input str yang masih aktif']);
+            }
+            if ($mass<=30) {
+                return response(['info','Opss','Masa Aktif STR anda kurang dari 30 hari, mohon segera mengurus perpanjangan str']);
+            }
+            Istr::create(array_merge($request->all(), [
+                'nake_id' => Auth::user()->nake->id,
+                'jnake_id'=>Auth::user()->nake->jnake_id,
+                'str_name'=>$nameStr,
+                'str_link'=>url($data),
+                'str_size'=>Storage::size($data),
+                'str_mass'=>$mass
+                ]));
+            return response(['success','Yeay','Anda Berhasil Menambahkan STR']);               
+        }
+        if (($data->str_mass)>60) {
+            $date=$data->str_exp;
+            $date->sub(new DateInterval("P60D"));
+            $date->format('Y-m-d');
+            // $date=$date->format("yy-m-d");
+            return response(['info','Opss','Belum Waktunya anda menambahkan STR, anda dapat menambahkan str pada tanggal '.$date.'']);
+        }                   
     }
 
     /**

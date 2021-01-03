@@ -22,7 +22,7 @@ $('body').on('click', '.modal-show', function (event) {
             
         }
     });
-    $('#modal').modal('show');    
+    $('#modal').modal('show');      
 });
 $('#modal-button-save').click(function(event){
     event.preventDefault();
@@ -38,21 +38,20 @@ $('#modal-button-save').click(function(event){
         $.ajax({
             url:url,
             method:method,
-            data:form.serialize(),
+            data:form,
+            // data:form.serialize(),
             contentType:false,
             processData:false,
-            success:function(){
-                form.trigger('reset');
+            success:function(x){
                 $('#modal').modal('hide');
                 $('#datatable').DataTable().ajax.reload();
                 $('#sip_datatable').DataTable().ajax.reload();
                 $('#str_datatable').DataTable().ajax.reload();
                 swal.fire(
-                    'Yaay!',
-                    ''+res+' Berhasil',
-                    'success'
+                    ''+x[1]+'',
+                    ''+x[2]+'',
+                    ''+x[0]+''
                 );
-                location.reload();
             },
             error:function(xhr){
                 var res=xhr.responseJSON;
@@ -178,9 +177,7 @@ $('.form-control').keypress(function(event){
                     cancelButtonText: 'Tidak',
                   }).then((result) => {
                     if (result.value) {
-                        $('#cariidentitas').click(); 
-                        
-                        
+                        $('.modal-show').click(); 
                     } else if (
                       /* Read more about handling dismissals below */
                       result.dismiss === Swal.DismissReason.cancel

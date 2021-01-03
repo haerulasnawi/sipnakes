@@ -1,5 +1,6 @@
 <div class="modal fade" tabindex="-1" role="dialog" id="modal" data-backdrop="static" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <!-- <div class="modal-dialog modal-dialog-scrollable" role="document"> -->
+    <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
         <div class="modal-header">
         <h5 id="modal-title" class="modal-title">Form Input</h5>

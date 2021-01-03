@@ -22,7 +22,7 @@
                     <label class="form-label">Masukan Nomor Induk Kependudukan (NIK)</label>
                     <input id="number" name="number" type="text" class="form-control" required placeholder="" aria-label="">
 
-                        <a id="cariidentitas" href="{{route('nakes.create')}}" data-id="{{Auth::user()->id}}" class="btn btn-primary modal-show" hidden type="button" title="Buat Akun Nakes">Cari</a>
+                        <a id="modal" href="{{route('nakes.create')}}" data-id="{{Auth::user()->id}}" class="btn btn-primary modal-show" hidden type="button" title="Buat Akun Nakes">Cari</a>
 
                 </div>
             </form>            

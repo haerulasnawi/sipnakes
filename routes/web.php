@@ -91,10 +91,23 @@ Route::group(['middleware' => ['auth', 'checkrole:faskes', 'verified']], functio
 // Route::get('list','DropFileController@index');
 
 Route::get('/list', function() {
-    $client = new Spatie\Dropbox\Client('mA2b5ITMl78AAAAAAAAAAUSo8Yo66xPhfvAt7jpJcgVY6aDucjKbtXFz-hC6BJLS');
-    $client=Storage::disk('dropbox')->get('/');
-    // $client = new Spatie\Dropbox\Client(['1ajsglc9co7o5af','6mm5w7qmg2jui5l']);
-    // $client = new Spatie\Dropbox\Client(['6mm5w7qmg2jui5l']);
-    // $client=$client->listFolder('/');
-    return $client;
+    $date_now=new DateTime("now");
+    // $date_now=$date_now->format("yy-m-d");
+
+    // dd($date_now);
+    $date_now=$date_now->sub(new DateInterval("P60D"));
+    $date_now=$date_now->format("yy-m-d");
+    // $date_next=new DateTime('2019-01-01');
+    // $date=$date_now->diff($date_next);
+    // $date=$date->format('%r%a');
+    return $date_now;
+
+
+
+    // $client = new Spatie\Dropbox\Client('mA2b5ITMl78AAAAAAAAAAUSo8Yo66xPhfvAt7jpJcgVY6aDucjKbtXFz-hC6BJLS');
+    // $client=Storage::disk('dropbox')->get('/');
+    // // $client = new Spatie\Dropbox\Client(['1ajsglc9co7o5af','6mm5w7qmg2jui5l']);
+    // // $client = new Spatie\Dropbox\Client(['6mm5w7qmg2jui5l']);
+    // // $client=$client->listFolder('/');
+    // return $client;
 });
