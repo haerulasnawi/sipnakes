@@ -77,10 +77,9 @@ class IstrController extends Controller
             return response(['success','Yeay','Anda Berhasil Menambahkan STR']);               
         }
         if (($data->str_mass)>60) {
-            $date=$data->str_exp;
-            $date->sub(new DateInterval("P60D"));
-            $date->format('Y-m-d');
-            // $date=$date->format("yy-m-d");
+            $date=new DateTime($data->str_exp);
+            $date=$date->sub(new DateInterval("P60D"));
+            $date=$date->format('d-m-Y');
             return response(['info','Opss','Belum Waktunya anda menambahkan STR, anda dapat menambahkan str pada tanggal '.$date.'']);
         }                   
     }
